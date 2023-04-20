@@ -1,0 +1,17 @@
+server:
+  servlet:
+    session:
+      tracking-modes: cookie
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@211.38.173.250:1521:xe
+    username: movie_db
+    password: 1234
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+# 후에 추가 예정입니다.
+#mybatis:
+#  mapper-locations: classpath:mapper/**/*.xml
+#  config-location: classpath:config/mybatis-config.xml
