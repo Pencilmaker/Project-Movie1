@@ -1,5 +1,11 @@
 package com.movie.model;
 
-public class Movie {
+import lombok.Data;
 
+@Data
+public class Movie {
+    private String id;
+    private String title;
+    private String overview;
+    
 }
