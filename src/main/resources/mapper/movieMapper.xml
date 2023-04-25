@@ -15,5 +15,9 @@
 			#{overview}
         )
     </insert>
+    
+    <select id="findId" resultType="movie">
+    	select * from movie_id where id = #{id}
+    </select>
     	
 </mapper>

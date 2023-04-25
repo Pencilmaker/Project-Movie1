@@ -8,4 +8,6 @@ import com.movie.model.Movie;
 @Mapper
 public interface MovieMapper {
 	int saveId(Movie movie);
+	
+	Movie findId(String id);
 }
