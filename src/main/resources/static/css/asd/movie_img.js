@@ -23,12 +23,6 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
   })
   .catch(error => console.error(error));
 
-/*
-	<label class="card" for="item-2" id="song-2">
-      <img src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80" alt="song">
-    </label>
-*/
-
 fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`)
   .then(response => response.json())
   .then(data => {
@@ -40,9 +34,16 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
       songareaContainer.classList.add('song-info');
       songareaContainer.setAttribute('id', `song-info-${index + 1}`);
 
+      const titleLinkElement = document.createElement('a');
+      titleLinkElement.href = `http://localhost:9000/movie/movie?id=${movie.id}`;
+      titleLinkElement.target = '_blank';
+
       const titleElement = document.createElement('div');
       titleElement.classList.add('title');
       titleElement.textContent = movie.title;
+      
+      titleLinkElement.appendChild(titleElement);
+      songareaContainer.appendChild(titleLinkElement);
 
       const subtitleContainer = document.createElement('div');
       subtitleContainer.classList.add('sub-line');
@@ -54,11 +55,19 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
       const timeElement = document.createElement('div');
       timeElement.classList.add('time');
       timeElement.textContent = "4.05";
+      
+      titleLinkElement.addEventListener('click', () => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `http://localhost:9000/movie/${movie.id}`); // 데이터를 보낼 URL 설정
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.send(JSON.stringify({ id: movie.id, title: movie.title, overview: movie.overview, poster_path: movie.poster_path })); // id 데이터 전송
+
+        alert(`Movie ID: ${movie.id}`); // 이미지 클릭 시 알림창
+      });      
 
       subtitleContainer.appendChild(subtitleElement);
       subtitleContainer.appendChild(timeElement);
 
-      songareaContainer.appendChild(titleElement);
       songareaContainer.appendChild(subtitleContainer);
 
       infoareasContainer.appendChild(songareaContainer);
