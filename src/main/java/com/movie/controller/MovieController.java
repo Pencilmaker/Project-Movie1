@@ -1,10 +1,15 @@
 package com.movie.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.movie.model.Movie;
 import com.movie.repository.MovieMapper;
@@ -33,6 +38,19 @@ public class MovieController {
 			log.info("이미 등록된 id입니다.");
 		}
 		return ResponseEntity.ok("등록성공");
+	}
+	
+	@GetMapping("/movie/{id}")
+	public String movieInfo(
+			@RequestParam String id, Model model) {
+		log.info("getmapping /movie 시작");
+		log.info(id);
+		Movie movie = movieMapper.findId(id);
+		log.info("movie: {}", movie);	
+		
+		model.addAttribute("movie", movie);
+		
+		return "movie/movie";
 	}
 	
 }

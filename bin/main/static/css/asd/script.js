@@ -12,7 +12,7 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
       movieElement.classList.add('movie');
 
       const imgLinkElement = document.createElement('a');
-      imgLinkElement.href = `https://localhost:9000/movie/${movie.id}`;
+      imgLinkElement.href = `http://localhost:9000/movie/movie/${movie.id}`;
       imgLinkElement.target = '_blank';
 
       const imgElement = document.createElement('img');
