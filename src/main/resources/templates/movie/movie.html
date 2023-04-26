@@ -17,6 +17,10 @@
         <th>overview</th>
         <td th:text="*{overview}"></td>
       </tr>
+      <tr>
+        <th>poster_path</th>
+        <td><img th:src="@{https://image.tmdb.org/t/p/w500/__${movie.poster_path}__}"/></td>
+      </tr>
     </table>
 </div>
 </body>

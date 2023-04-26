@@ -1,15 +1,13 @@
 package com.movie.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.movie.model.Movie;
 import com.movie.repository.MovieMapper;
@@ -20,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("movie")
-@RestController
+@Controller
 public class MovieController {
 	
 	private final MovieMapper movieMapper;
@@ -40,11 +38,11 @@ public class MovieController {
 		return ResponseEntity.ok("등록성공");
 	}
 	
-	@GetMapping("/movie/{id}")
+	@GetMapping("{id}")
 	public String movieInfo(
 			@RequestParam String id, Model model) {
 		log.info("getmapping /movie 시작");
-		log.info(id);
+		log.info("id: {}", id);
 		Movie movie = movieMapper.findId(id);
 		log.info("movie: {}", movie);	
 		

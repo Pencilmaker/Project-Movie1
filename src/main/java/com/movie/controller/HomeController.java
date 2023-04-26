@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-
 @Controller
 public class HomeController {
 		
@@ -22,5 +21,4 @@ public class HomeController {
     	log.info("Movie Info");
     	return "movie/movie_web";
     }
-
 }

@@ -12,7 +12,7 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
       movieElement.classList.add('movie');
 
       const imgLinkElement = document.createElement('a');
-      imgLinkElement.href = `http://localhost:9000/movie/movie/${movie.id}`;
+      imgLinkElement.href = `http://localhost:9000/movie/movie?id=${movie.id}`;
       imgLinkElement.target = '_blank';
 
       const imgElement = document.createElement('img');
@@ -41,7 +41,7 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'movie/${movie.id}'); // 데이터를 보낼 URL 설정
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        xhr.send(JSON.stringify({ id: movie.id, title: movie.title, overview: movie.overview })); // id 데이터 전송
+        xhr.send(JSON.stringify({ id: movie.id, title: movie.title, overview: movie.overview, poster_path: movie.poster_path })); // id 데이터 전송
 
         alert(`Movie ID: ${movie.id}`); // 이미지 클릭 시 알림창
       });

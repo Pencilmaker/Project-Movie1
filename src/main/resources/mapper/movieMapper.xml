@@ -8,11 +8,13 @@
         insert into movie_id(
 			id,
 			title,
-			overview
+			overview,
+			poster_path
         ) values (
 			#{id},
 			#{title},
-			#{overview}
+			#{overview},
+			#{poster_path}
         )
     </insert>
     
