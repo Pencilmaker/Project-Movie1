@@ -50,7 +50,7 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
 
       const subtitleElement = document.createElement('div');
       subtitleElement.classList.add('subtitle');
-      subtitleElement.textContent = "";
+      subtitleElement.textContent = "subtitle";
 
       const timeElement = document.createElement('div');
       timeElement.classList.add('time');
