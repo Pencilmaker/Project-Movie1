@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>회원가입</title>
+</head>
+<style>
+    * {
+        margin: 10px auto;
+    }
+
+    body {
+        background-color: rgba(234, 255, 248, 0.558);
+    }
+
+    .signUptype {
+        width: 270px;
+        height: 50px;
+        background-color: rgba(26, 77, 122, 0.606);
+        font-size: large;
+        color: rgb(255, 255, 255);
+    }
+
+    .firsttype {
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .secondtype {
+        width: 80px;
+        height: 50px;
+    }
+
+    .gender{
+        width: 270px;
+        height: 50px;
+    }
+</style>
+
+<body>
+    <form action="">
+        <div class="center">
+            <div>
+                <label for="user_id">아이디</label><br>
+                <input class="firsttype" type="text" name="id" id="id" maxlength="20" placeholder="아이디">
+            </div>
+            <div>
+                <label for="password1">비밀번호</label><br>
+                <input class="firsttype" type="password" name="password1" id="password1" maxlength="20"
+                    placeholder="비밀번호">
+            </div>
+            <div>
+                <label for="password2">비밀번호 재확인</label><br>
+                <input class="firsttype" type="password" name="password2" id="password2" maxlength="20"
+                    placeholder="비밀번호 확인">
+            </div>
+            <div>
+                <label for="name">이름</label><br>
+                <input class="firsttype" type="text" name="name" id="name" placeholder="이름">
+            </div>
+            <div>
+                <label for="birth">생년월일</label><br>
+                <input class="secondtype" type="text" name="yy" id="yy" placeholder="년(4자)" maxlength="4">
+                <select class="secondtype" name="mm" id="mm">
+                    <option value="">월</option>
+                    <option value="01">1</option>
+                    <option value="02">2</option>
+                    <option value="03">3</option>
+                    <option value="04">4</option>
+                    <option value="05">5</option>
+                    <option value="06">6</option>
+                    <option value="07">7</option>
+                    <option value="08">8</option>
+                    <option value="09">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                <input class="secondtype" type="text" name="dd" id="dd" placeholder="일" maxlength="2">
+            </div>
+            <div>
+                <label for="gender">성별</label><br>
+                <select class="gender" name="gender" id="gender">
+                    <option value="">성별</option>
+                    <option value="M">남</option>
+                    <option value="F">여</option>
+                </select>
+            </div>
+            <div>
+                <label for="email">이메일</label><br>
+                <input class="firsttype" type="email" name="yy" id="yy" placeholder="이메일">
+            </div>
+        </div>
+        <div class="center">
+            <input class="signUptype" type="submit" value="가입하기">
+        </div>
+    </form>
+</body>
+
+</html>

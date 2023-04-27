@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>로그인</title>
+</head>
+<style>
+    * {
+        margin: 10px auto;
+    }
+
+    body {
+        background-color: rgba(234, 255, 248, 0.558);
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .formStyle {
+        width: 400px;
+        border: 1px solid rgba(0, 0, 0, 0.312);
+        padding: 10px;
+    }
+
+    .firsttype {
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    .login {
+        width: 270px;
+        height: 50px;
+        background-color: rgba(26, 77, 122, 0.606);
+        font-size: large;
+        color: rgb(255, 255, 255);
+    }
+
+    a {
+        color: black;
+        font-style: normal;
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    <form action="">
+        <div class="formStyle">
+            <div class="center">
+                <div>
+                    <input class="firsttype" type="text" name="id" id="id" maxlength="20" placeholder="아이디"><br>
+                    <input class="firsttype" type="password" name="password" id="password" maxlength="20"
+                        placeholder="비밀번호">
+                </div>
+            </div>
+            <div class="center">
+                <input class="login" type="submit" value="로그인">
+                <input class="login" type="button" value="SNS로 로그인하기">
+            </div>
+        </div>
+        <div class="center">
+            <span>
+                <a target="_blank" href="http://localhost:9000/findpwd.html">비밀번호 찾기</a>
+                |
+                <a target="_blank" href="http://localhost:9000/findid.html">아이디 찾기</a>
+                |
+                <a target="_blank" href="http://localhost:9000/signUp">회원가입</a>
+            </span>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>아이디 찾기</title>
+</head>
+<style>
+    * {
+        margin: 10px auto;
+    }
+
+    body {
+        background-color: rgba(234, 255, 248, 0.558);
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .formStyle {
+        width: 400px;
+        border: 1px solid rgba(0, 0, 0, 0.312);
+        padding: 10px;
+    }
+
+    .firsttype {
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    .login {
+        width: 270px;
+        height: 50px;
+        background-color: rgba(26, 77, 122, 0.606);
+        font-size: large;
+        color: rgb(255, 255, 255);
+    }
+
+    a {
+        color: black;
+        font-style: normal;
+        text-decoration: none;
+    }
+    
+    .secondtype {
+        width: 280px;
+        height: 30px;
+    }
+</style>
+
+<body>
+    <form action="">
+        <div class="center">
+            <h2>아이디 찾기</h2>
+            <h4>복구 방법을 선택하세요.</h4>            
+            <div class="formStyle">
+                    <select class="secondtype" name="findid" id="findid">
+                        <option value="">방법을 선택해주세요.</option>
+                        <option value="email">이메일로 아이디 찾기</option>
+                        <option value="phone">휴대폰 번호로 아이디 찾기</option>
+                        <option value="question">회원가입 시 본인확인 메시지로 찾기</option>
+                    </select>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

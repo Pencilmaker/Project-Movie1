@@ -15,16 +15,11 @@ public class HomeController {
     	log.info("메인 페이지");
         return "index";
     }
-    
+   
     @GetMapping("movie_web")
     public String movie() {
     	log.info("Movie Info");
     	return "movie/movie_web";
     }
-    
-    @GetMapping("movieScroll")
-    public String movieScroll() {
-    	log.info("Movie Scroll");
-    	return "movie/movieScroll";
-    }
+
 }
