@@ -21,5 +21,12 @@ public class HomeController {
     	log.info("Movie_web");
     	return "movie/movie_web";
     }
+    
+    @GetMapping("movie_search")
+    public String movieSearch() {
+    	log.info("Movie_search");
+    	return "movie/movie_search";
+    }
+
 
 }
