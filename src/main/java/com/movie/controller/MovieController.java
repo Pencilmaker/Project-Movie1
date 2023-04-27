@@ -48,7 +48,7 @@ public class MovieController {
 		
 		model.addAttribute("movie", movie);
 		
-		return "movie/movie";
+		return "movie/movieinfo";
 	}
 	
 }
