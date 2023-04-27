@@ -43,7 +43,7 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         xhr.send(JSON.stringify({ id: movie.id, title: movie.title, overview: movie.overview, poster_path: movie.poster_path })); // id 데이터 전송
 
-        alert(`Movie ID: ${movie.id}`); // 이미지 클릭 시 알림창
+/*        alert(`Movie ID: ${movie.id}`); // 이미지 클릭 시 알림창*/
       });
 
       moviesContainer.appendChild(movieElement);

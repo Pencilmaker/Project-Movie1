@@ -21,4 +21,10 @@ public class HomeController {
     	log.info("Movie Info");
     	return "movie/movie_web";
     }
+    
+    @GetMapping("movieScroll")
+    public String movieScroll() {
+    	log.info("Movie Scroll");
+    	return "movie/movieScroll";
+    }
 }
