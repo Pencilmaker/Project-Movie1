@@ -5,5 +5,6 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.movie.model.Movie" alias="movie"/>
+        <typeAlias type="com.movie.model.member.Member" alias="member"/>
     </typeAliases>
 </configuration>
