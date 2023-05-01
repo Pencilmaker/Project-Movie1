@@ -70,6 +70,7 @@ public class MemberController {
         return "redirect:/";
     }
     
+    // 로그인
     @PostMapping("login")
     public String login(@Validated @ModelAttribute("loginForm") LoginForm loginForm,
             BindingResult result,
@@ -93,6 +94,9 @@ public class MemberController {
         HttpSession session = request.getSession();
         // Session 에 'loginMember' 라는 이름으로 Member 객체를 저장한다.
         session.setAttribute("loginMember", member);
+        
+        log.info("{} 아이디로 로그인 성공", loginForm.getMember_id());
+        
         // 메인 페이지로 리다이렉트 한다.
         return "redirect:/";
     }
