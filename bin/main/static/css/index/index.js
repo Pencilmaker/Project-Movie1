@@ -3,7 +3,7 @@ const apiKey = 'dfcdb12192ff1bc68ebd64bb5f86f67e';
 fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`)
   .then(response => response.json())
   .then(data => {
-    const movies = data.results.slice(0, 5);
+    const movies = data.results.slice(5, 10);
     const songsContainer = document.getElementById('songs');
 
     movies.forEach((movie, index) => {
@@ -26,7 +26,7 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
 fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`)
   .then(response => response.json())
   .then(data => {
-    const movies = data.results.slice(0, 5);
+    const movies = data.results.slice(5, 10);
     const infoareasContainer = document.getElementById('test');
 
     movies.forEach((movie, index) => {

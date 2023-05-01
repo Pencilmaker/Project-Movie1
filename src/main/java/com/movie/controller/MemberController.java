@@ -66,6 +66,9 @@ public class MemberController {
         
         // MemberJoinForm 객체를 Member 타입으로 변환하여 데이터베이스에 저장한다.
         memberMapper.saveMember(MemberJoinForm.toMember(joinForm));
+        
+        log.info("{}의 아이디를 가진 정보 가입 완료", joinForm.getMember_id());
+        
         // 메인 페이지로 리다이렉트한다.
         return "redirect:/";
     }
