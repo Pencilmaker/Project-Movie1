@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 읽기</title>
-<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/movie/movieinfo.css">
 </head>
 <body>
 	<nav>
@@ -11,24 +11,17 @@
 				<ul>
 					<li><a href="http://localhost:9000/movie_web">Movie</a></li>
 					<li><a href="http://localhost:9000/movie_search">Search</a></li>
-					<li><a href="http://localhost:9000/login">Login</a></li>
+					<li><a href="http://localhost:9000/member/login">Login</a></li>
 				</ul>
 	</nav>
 	<div id="container">
-		<h1>[ 게시판 - 글 읽기 ]</h1>
 		<table th:object="${movie}">
 			<tr>
-				<th>제목</th>
-				<td th:text="*{title}"></td>
+				<td><img th:src="@{https://image.tmdb.org/t/p/w500/__${movie.poster_path}__}" width="300px" height="400px"></td>
+				<td th:text="*{overview}"></td>				
 			</tr>
 			<tr>
-				<th>overview</th>
-				<td th:text="*{overview}"></td>
-			</tr>
-			<tr>
-				<th>poster_path</th>
-				<td><img
-					th:src="@{https://image.tmdb.org/t/p/w500/__${movie.poster_path}__}" /></td>
+				<td colspan="2">내용 생략</td>			
 			</tr>
 		</table>
 	</div>
