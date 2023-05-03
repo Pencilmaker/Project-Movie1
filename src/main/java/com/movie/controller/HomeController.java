@@ -16,9 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 		
     @GetMapping("")
-    public String home(@Validated @ModelAttribute("loginForm") LoginForm loginForm,
-            BindingResult result) {
-    	log.info("{} 아이디로 로그인",loginForm.getMember_id());
+    public String home() {
     	log.info("메인 페이지");
         return "index";
     }

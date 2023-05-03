@@ -1,6 +1,7 @@
 package com.movie.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -70,13 +71,14 @@ public class MemberController {
         log.info("{}의 아이디를 가진 정보 가입 완료", joinForm.getMember_id());
         
         // 메인 페이지로 리다이렉트한다.
-        return "redirect:/member/login";
+        return "redirect:/";
     }
     
     // 로그인
     @PostMapping("login")
     public String login(@Validated @ModelAttribute("loginForm") LoginForm loginForm,
             BindingResult result,
+            HttpServletResponse response, 
             HttpServletRequest request) {
         log.info("입력한 값: {}", loginForm);
         // validation 에 실패하면 member/loginForm 페이지로 돌아간다.
@@ -129,5 +131,16 @@ public class MemberController {
 		// 메인 페이지로 리다이렉트한다.
 		return "redirect:/";
 		}
+    
+ // 로그아웃
+    @GetMapping("logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+           session.invalidate();
+        }
+        
+       return "redirect:/";
+    }
 
 }
