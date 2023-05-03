@@ -70,7 +70,7 @@ public class MemberController {
         log.info("{}의 아이디를 가진 정보 가입 완료", joinForm.getMember_id());
         
         // 메인 페이지로 리다이렉트한다.
-        return "redirect:/";
+        return "redirect:/member/login";
     }
     
     // 로그인
@@ -103,5 +103,31 @@ public class MemberController {
         // 메인 페이지로 리다이렉트 한다.
         return "redirect:/";
     }
+    
+    // 네이버 로그인
+    @PostMapping("naversignUp")
+    public String naverlogin(@Validated @ModelAttribute("joinForm") MemberJoinForm joinForm,
+            BindingResult result) {
+		
+		log.info("입력한 값: {}", joinForm);
+		
+		// 사용자로부터 입력받은 아이디로 데이터베이스에서 Member 를 검색한다.
+		Member member = memberMapper.findMember(joinForm.getMember_id());
+		// 사용자 정보가 존재하면
+		if (member != null) {
+		 log.info("이미 가입된 아이디 입니다.");
+
+		 // member/joinForm.html 페이지를 리턴한다.
+		 return "redirect:/";
+		}
+		
+		// MemberJoinForm 객체를 Member 타입으로 변환하여 데이터베이스에 저장한다.
+		memberMapper.saveMember(MemberJoinForm.toMember(joinForm));
+		
+		log.info("{}의 아이디를 가진 정보 가입 완료", joinForm.getMember_id());
+		
+		// 메인 페이지로 리다이렉트한다.
+		return "redirect:/";
+		}
 
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class MemberJoinForm {
-    @Size(min = 4, max = 20)
+    @Size(min = 4, max = 100)
     private String member_id;
     @Size(min = 4, max = 20)
     private String password;
