@@ -25,28 +25,30 @@
 			  <li th:unless="${session.loginMember}"><a href="http://localhost:9000/member/login">로그인</a></li>
 			</ul>
 	  </nav>
-<div id="fullpage">
-	<div class="section" id="section0">
-		<div class="main">
-			<input type="radio" name="slider" id="item-1" checked>
-			<input type="radio" name="slider" id="item-2">
-			<input type="radio" name="slider" id="item-3">
-			<input type="radio" name="slider" id="item-4">
-			<input type="radio" name="slider" id="item-5">
-			<div class="cards">
-				<div id="songs"></div>
+	<div id="fullpage">
+		<div class="section" id="section0">
+			<div class="main">
+				<input type="radio" name="slider" id="item-1" checked>
+				<input type="radio" name="slider" id="item-2">
+				<input type="radio" name="slider" id="item-3">
+				<input type="radio" name="slider" id="item-4">
+				<input type="radio" name="slider" id="item-5">
+				<div class="cards">
+					<div id="songs"></div>
+				</div>
 			</div>
-		</div>
 		<div>
 			<h1>여기는 검색기능</h1>
 		</div>
 	</div>
 	<div class="section" id="section1">
 		<div class="intro">
-			<h1>Speed on mobile</h1>
-			<p>
-	      If CSS3 transforms are supported they will be used for animations.
-			</p>
+			<div class="viewMovie">
+				<h1>인기 영화</h1>
+				<div id="movies"></div>
+				<h1>Top Rate</h1>  
+				<div id="toprate"></div>
+			</div>
 		</div>
 	</div>
 	<div class="section" id="section2">
