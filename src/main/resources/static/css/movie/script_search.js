@@ -11,7 +11,7 @@ form.addEventListener('submit', (e) => {
 });
 
 async function searchMovies(searchTerm) {
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}`; // TMDB API에서 검색하는 URL을 생성합니다.
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=ko-KR&query=${searchTerm}`; // TMDB API에서 검색하는 URL을 생성합니다.
   const response = await fetch(url); // URL로 GET 요청을 보내고 응답을 기다립니다.
   const data = await response.json(); // 응답을 JSON으로 변환합니다.
   displayMovies(data.results); // 검색 결과를 출력합니다.

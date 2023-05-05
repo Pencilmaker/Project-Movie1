@@ -48,13 +48,43 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
       titleElement.textContent = movie.title;
       movieElement.appendChild(titleElement);
 
-      const releaseDateElement = document.createElement('p');
-      releaseDateElement.textContent = `Release Date: ${movie.release_date}`;
-      movieElement.appendChild(releaseDateElement);
+      imgLinkElement.addEventListener('click', () => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'movie/${movie.id}'); // 데이터를 보낼 URL 설정
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.send(JSON.stringify({ id: movie.id, title: movie.title, overview: movie.overview, poster_path: movie.poster_path })); // id 데이터 전송
 
-      const idElement = document.createElement('p');
-      idElement.textContent = `id: ${movie.id}`;
-      movieElement.appendChild(idElement);
+        // alert(`Movie ID: ${movie.id}`); // 이미지 클릭 시 알림창
+      });
+
+      moviesContainer.appendChild(movieElement);
+    });
+  })
+  
+  fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=ko-KR&page=1&region=KR`)
+  .then(response => response.json())
+  .then(data => {
+    const movies = data.results;
+    const moviesContainer = document.getElementById('toprate');
+
+    movies.forEach(movie => {
+
+      const movieElement = document.createElement('div');
+      movieElement.classList.add('movie');
+
+      const imgLinkElement = document.createElement('a');
+      imgLinkElement.href = `http://localhost:9000/movie/movie?id=${movie.id}`;
+      imgLinkElement.target = '_blank';
+
+      const imgElement = document.createElement('img');
+      imgElement.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      imgLinkElement.appendChild(imgElement);
+      
+      movieElement.appendChild(imgLinkElement);
+      
+      const titleElement = document.createElement('h2');
+      titleElement.textContent = movie.title;
+      movieElement.appendChild(titleElement);
 
       imgLinkElement.addEventListener('click', () => {
         const xhr = new XMLHttpRequest();
@@ -68,4 +98,5 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
       moviesContainer.appendChild(movieElement);
     });
   })
+  
   .catch(error => console.error(error));
