@@ -18,7 +18,7 @@ public class HomeController {
     @GetMapping("")
     public String home() {
     	log.info("메인 페이지");
-        return "index";
+        return "main";
     }
    
     @GetMapping("movie_web")
