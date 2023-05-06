@@ -14,7 +14,6 @@
 		<a href="/">Home<a>
 			<ul>
 			  <li><a href="http://localhost:9000">홈</a></li>
-			  <li><a href="http://localhost:9000/movieInfo">영화</a></li>
 			  <li><a href="http://localhost:9000/movie_search">검색</a></li>
 			  <li th:if="${session.loginMember}"><a href="http://localhost:9000/member/logout">[[${session.loginMember.member_name}]]님</a></li>
 			  <li th:unless="${session.loginMember}"><a href="http://localhost:9000/member/login">로그인</a></li>

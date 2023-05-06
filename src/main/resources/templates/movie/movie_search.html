@@ -3,17 +3,18 @@
 <head>
 <title>TMDB API 예시</title>
 <link rel="stylesheet" type="text/css"
-	href="/css/movie/style_search.css">
+	href="/css/movie/search.css">
 </head>
 <body>
 	<nav>
-		<a href="/">Logo<a>
-				<ul>
-					<li><a href="http://localhost:9000/movie_web">Movie</a></li>
-					<li><a href="http://localhost:9000/movie_search">Search</a></li>
-					<li><a href="http://localhost:9000/member/login">Login</a></li>
-				</ul>
-	</nav>
+		<a href="/">Home<a>
+			<ul>
+			  <li><a href="http://localhost:9000">홈</a></li>
+			  <li><a href="http://localhost:9000/movie_search">검색</a></li>
+			  <li th:if="${session.loginMember}"><a href="http://localhost:9000/member/logout">[[${session.loginMember.member_name}]]님</a></li>
+			  <li th:unless="${session.loginMember}"><a href="http://localhost:9000/member/login">로그인</a></li>
+			</ul>
+	  </nav>
 	<div class="container">
 		<form>
 			<input type="text" placeholder="영화 제목을 입력하세요" id="search-input">
@@ -21,6 +22,6 @@
 		</form>
 	</div>
 	<div id="movies"></div>
-	<script src="/css/movie/script_search.js"></script>
+	<script src="/css/movie/search.js"></script>
 </body>
 </html>
