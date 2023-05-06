@@ -47,7 +47,7 @@ public class MovieController {
 		log.info("movie: {}", movie);	
 		
 		model.addAttribute("movie", movie);
-		
+		  
 		return "movie/movieinfo";
 	}
 	
