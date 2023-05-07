@@ -18,28 +18,34 @@ function hideTrailer() {
 	const API_URL = `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`;
 
 	function showTrailer() {
-	  fetch(API_URL)
-	    .then(response => response.json())
-	    .then(data => {
-	      const trailer = data.results.find(video => video.site === 'YouTube' && video.type === 'Trailer');
-	      const videoId = trailer ? trailer.key : null;
-	      if (videoId) {
-	        const player = new YT.Player('player', {
-	          height: '360',
-	          width: '640',
-	          videoId,
-	          events: {
-	            'onReady': function() {
-	              document.querySelector('.overlay').classList.add('show');
-	              player.playVideo();
-	            }
-	          }
-	        });
-	      }
-	    })
-	    .catch(error => console.error(error));
-	}
-
+		  fetch(API_URL)
+		    .then(response => response.json())
+		    .then(data => {
+		      const trailer = data.results.find(video => video.site === 'YouTube' && video.type === 'Trailer');
+		      const videoId = trailer ? trailer.key : null;
+		      if (videoId) {
+		        const player = new YT.Player('player', {
+		          height: '360',
+		          width: '640',
+		          videoId,
+		          events: {
+		            'onReady': function() {
+		              document.querySelector('.overlay').classList.add('show');
+		              player.playVideo();
+		            }
+		          }
+		        });
+		        // 오버레이 클릭 시 정지
+		        document.querySelector('.overlay').addEventListener('click', function() {
+		          player.stopVideo();
+		          document.querySelector('.overlay').classList.remove('show');
+		        });
+		      }
+		    })
+		    .catch(error => console.error(error));
+		}
+	
+	
 	
 </script>
 </head>
