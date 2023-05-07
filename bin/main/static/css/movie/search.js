@@ -28,7 +28,9 @@ function displayMovies(movies) {
       <h2>${movie.title}</h2>
       <p>${movie.release_date}</p>
     `; // 영화 제목, 개봉일, 포스터 이미지로 구성된 HTML을 작성합니다.
+    
     movieElement.innerHTML = movieContent;
     moviesContainer.appendChild(movieElement); // 생성한 div 요소를 moviesContainer에 추가합니다.
+    
   });
 }

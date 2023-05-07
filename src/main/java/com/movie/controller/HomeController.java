@@ -18,12 +18,12 @@ public class HomeController {
     @GetMapping("")
     public String home() {
     	log.info("메인 페이지");
-        return "index";
+        return "main";
     }
    
     @GetMapping("movie_web")
     public String movie() {
-    	log.info("Movie_web");
+    	log.info("movie_web");
     	return "movie/movie_web";
     }
     
