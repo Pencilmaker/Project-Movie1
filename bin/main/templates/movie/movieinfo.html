@@ -29,20 +29,29 @@ function hideTrailer() {
 		          videoId,
 		          events: {
 		            'onReady': function() {
-		              document.querySelector('.overlay').classList.add('show');
+		              const overlay = document.querySelector('.overlay');
+		              overlay.classList.add('show');
 		              player.playVideo();
+
+		              // 플레이 버튼 클릭 이벤트 등록
+		              const playBtn = document.querySelector('.play-button');
+		              playBtn.addEventListener('click', function() {
+		                overlay.classList.add('show');
+		                player.playVideo();
+		              });
 		            }
 		          }
 		        });
+		        
 		        // 오버레이 클릭 시 정지
-		        document.querySelector('.overlay').addEventListener('click', function() {
+		        const overlay = document.querySelector('.overlay');
+		        overlay.addEventListener('click', function() {
 		          player.stopVideo();
-		          document.querySelector('.overlay').classList.remove('show');
+		          overlay.classList.remove('show');
 		        });
 		      }
 		    })
 		    .catch(error => console.error(error));
-		}	
 </script>
 </head>
 <body>
