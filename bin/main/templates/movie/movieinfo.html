@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>게시글 읽기</title>
@@ -8,50 +8,51 @@
 <script>
 
 function hideTrailer() {
-	  document.querySelector('.overlay').classList.remove('show');
-	  const player = document.querySelector('#player').innerHTML = '';
-	}
-	 
-	const API_KEY = 'dfcdb12192ff1bc68ebd64bb5f86f67e';
-	const MOVIE_ID = '[[${movie.id}]]';
-	const API_URL = `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`;
+    document.querySelector('.overlay').classList.remove('show');
+    const player = document.querySelector('#player').innerHTML = '';
+}
 
-	function showTrailer() {
-		  fetch(API_URL)
-		    .then(response => response.json())
-		    .then(data => {
-		      const trailer = data.results.find(video => video.site === 'YouTube' && video.type === 'Trailer');
-		      const videoId = trailer ? trailer.key : null;
-		      if (videoId) {
-		        const player = new YT.Player('player', {
-		          height: '360',
-		          width: '640',
-		          videoId,
-		          events: {
-		            'onReady': function() {
-		              const overlay = document.querySelector('.overlay');
-		              overlay.classList.add('show');
-		              player.playVideo();
+const API_KEY = 'dfcdb12192ff1bc68ebd64bb5f86f67e';
+const MOVIE_ID = '[[${movie.id}]]';
+const API_URL = `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`;
 
-		              // 플레이 버튼 클릭 이벤트 등록
-		              const playBtn = document.querySelector('.play-button');
-		              playBtn.addEventListener('click', function() {
-		                overlay.classList.add('show');
-		                player.playVideo();
-		              });
-		            }
-		          }
-		        });
-		        
-		        // 오버레이 클릭 시 정지
-		        const overlay = document.querySelector('.overlay');
-		        overlay.addEventListener('click', function() {
-		          player.stopVideo();
-		          overlay.classList.remove('show');
-		        });
-		      }
-		    })
-		    .catch(error => console.error(error));
+function showTrailer() {
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            const trailer = data.results.find(video => video.site === 'YouTube' && video.type === 'Trailer');
+            const videoId = trailer ? trailer.key : null;
+            if (videoId) {
+                const player = new YT.Player('player', {
+                    height: '360',
+                    width: '640',
+                    videoId,
+                    events: {
+                        'onReady': function() {
+                            const overlay = document.querySelector('.overlay');
+                            overlay.classList.add('show');
+                            player.playVideo();
+
+                            // 플레이 버튼 클릭 이벤트 등록
+                            const playBtn = document.querySelector('.play-button');
+                            playBtn.addEventListener('click', function() {
+                                overlay.classList.add('show');
+                                player.playVideo();
+                            });
+                        }
+                    }
+                });
+
+                // 오버레이 클릭 시 정지
+                const overlay = document.querySelector('.overlay');
+                overlay.addEventListener('click', function() {
+                    player.stopVideo();
+                    overlay.classList.remove('show');
+                });
+            }
+        })
+        .catch(error => console.error(error));
+}
 </script>
 </head>
 <body>
@@ -73,7 +74,6 @@ function hideTrailer() {
 		<div class="details">
 			<h1 class="title" th:text="*{title}"></h1>
 			<p class="description" th:text="*{overview}"></p>
-			<p class="description" th:text="*{id}"></p>
 			<button class="play-button" id="play" onclick="showTrailer()">Play</button>
 			
 		</div>
