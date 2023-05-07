@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/css/movie/search.css">
+<title>영화 검색 결과</title>
+</head>
+<body>
+	<nav>
+		<a href="/">Home<a>
+		<ul th:if="${session.loginMember}">
+			<li><a href="http://localhost:9000/movie_search">검색</a></li>
+			<li><a href="http://localhost:9000/movie_web">영화</a></li>
+			<li><a href="http://localhost:9000/mypage">[[${session.loginMember.member_name}]]님</a></li>
+			<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
+		</ul>
+		<ul th:unless="${session.loginMember}">
+			<li><a href="http://localhost:9000/movie_search">검색</a></li>
+			<li><a href="http://localhost:9000/movie_web">영화</a></li>
+			<li><a href="http://localhost:9000/member/login">로그인</a></li>
+		</ul>
+	</nav>
+
+	<div class="container">
+		<h1>[[${searchinput}]](으)로 검색한 결과</h1>
+		<div id="movies"></div>
+	</div>
+	<script src="/css/movie/movie_results.js"></script>
+</body>
+</html>

@@ -14,13 +14,16 @@
 <body>
 	<nav>
 		<a href="/">Home<a>
-				<ul>
+				<ul th:if="${session.loginMember}">
 					<li><a href="http://localhost:9000/movie_search">검색</a></li>
 					<li><a href="http://localhost:9000/movie_web">영화</a></li>
-					<li th:if="${session.loginMember}"><a
-						href="http://localhost:9000/member/logout">[[${session.loginMember.member_name}]]님</a></li>
-					<li th:unless="${session.loginMember}"><a
-						href="http://localhost:9000/member/login">로그인</a></li>
+					<li><a href="http://localhost:9000/mypage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
+				</ul>
+				<ul th:unless="${session.loginMember}">
+					<li><a href="http://localhost:9000/movie_search">검색</a></li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/login">로그인</a></li>
 				</ul>
 	</nav>
 	<div id="fullpage">
@@ -36,9 +39,9 @@
 				</div>
 			</div>
 			<div class="searchbox">
-				<form>
-				  <input type="search" placeholder="검색힐 내용을 입력하세요">
-				  <button>검색</button>
+				<form target="_blank" action="movie_results">
+				  <input type="search" placeholder="검색할 내용을 입력하세요" name="searchinput">
+				  <button type="submit">검색</button>
 				</form>
 			</div>
 		</div>
@@ -58,21 +61,10 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="section" id="section3"></div>
-		<div class="section" id="section4">
-			<h1 style="color: #000000">5페이지</h1>
+		<div class="section" id="section3">
+			<h1>section3</h1>
 		</div>
-		<div class="section" id="section4">
-			<h1 style="color: #000000">6페이지</h1>
-		</div>
-		<div class="section" id="section5"></div>
-		<div class="section" id="section6">
-			<h1 style="color: #000000">8페이지</h1>
-		</div>
-
 	</div>
-
 
 	<script src="/css/main/importmovie.js"></script>
 	<script type="text/javascript" src="/css/main/scroll.js"></script>

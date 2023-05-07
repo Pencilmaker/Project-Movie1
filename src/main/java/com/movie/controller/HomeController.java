@@ -1,12 +1,9 @@
 package com.movie.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import com.movie.model.member.LoginForm;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,6 +29,15 @@ public class HomeController {
     	log.info("Movie_search");
     	return "movie/movie_search";
     }
+    
+    @GetMapping("movie_results")
+    public String movieResults(@RequestParam("searchinput") String searchInput, Model model) {
+        log.info("Movie_results");
+        log.info("{}", searchInput);
+        model.addAttribute("searchinput", searchInput);
+        return "movie/movie_results";
+    }
+
 
 
 }
