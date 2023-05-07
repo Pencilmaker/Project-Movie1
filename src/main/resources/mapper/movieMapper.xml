@@ -18,6 +18,18 @@
         )
     </insert>
     
+    <insert id="saveGenre">
+        insert into genres(
+			movie_id,
+			genre_id,
+			genre_name
+        ) values (
+			#{movie_id},
+			#{genre_id},
+			#{genre_name}
+        )
+    </insert>
+    
     <select id="findId" resultType="movie">
     	select * from movie_id where id = #{id}
     </select>

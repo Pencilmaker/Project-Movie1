@@ -22,16 +22,20 @@ a:hover {
 
 /* BODY */
 body {
+	margin: 0;
     position: relative;
     color: #666;
     font: 16px/26px "Raleway", sans-serif;
     text-align: center;
     height: 100%;
-    background: -moz-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(34,46,64,1)), color-stop(100%, rgba(81,195,184,1)));
-    background: -webkit-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
-    background: linear-gradient(180deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
     overflow:hidden;
+}
+
+#login-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 }
 
 /* BUTTON */
@@ -91,45 +95,17 @@ a.button:hover {
   clear: both;
 }
 
-/* LOGO */
-.logo {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    background: #4FC1B7;
-}
-.logo img {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 30px;
-}
-.logo a {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
 /* USER (FORM WRAPPER) */
 .user {
     position: relative;
     z-index: 0;
     float: none;
-    margin: 0 auto;
     padding-top: 40px;
     width: 100%;
     height: 100vh;
     overflow: auto;
-    background: -moz-linear-gradient(48deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%);
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(42,46,54,1)), color-stop(100%, rgba(97,107,125,1)));
-    background: -webkit-linear-gradient(48deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%);
-    background: linear-gradient(42deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%);
+    /* 로그인 & 회원가입 뒷배경 */
+	background: #ffffff;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -298,15 +274,15 @@ a.button:hover {
     float: none;
     margin: 0 auto;
     width: 100%;
-    height: 40px;
-    background: -moz-linear-gradient(90deg, rgba(62,181,169,1) 0%, rgba(111,226,204,1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(111,226,204,1)), color-stop(100%, rgba(62,181,169,1)));
-    background: -webkit-linear-gradient(90deg, rgba(62,181,169,1) 0%, rgba(111,226,204,1) 100%);
-    background: linear-gradient(0deg, rgba(62,181,169,1) 0%, rgba(111,226,204,1) 100%);
+    height: 100%;
+    /* 영화포스터 뒷배경 */
+
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     overflow: hidden;
+    background-size: contain;
+    background-position: center center;
 }
 
 /* TOGGLE */
@@ -492,52 +468,50 @@ a.button:hover {
     margin: 0 auto;
     width: 100%;
     height: 100%;
-    padding: 10px;
     border-radius: 10px 0 0 10px;
 }
-#slideshow h2 {
-    margin: .0em auto .0em auto;
-    text-align: center;
-    font-size: 1.4em;
-    color: #fff;
-    line-height: .5em;
-}
-#slideshow p {
-  color: #fff;
-  display: none;
-}
+
+/* 직접적인 영화 포스터 */
 #slideshow div {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 1em 3em;
+
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-position: center;
+    background-clip: content-box;
+    width: 100%;
+    height: 100%;
 }
 #slideshow .one {
-    background-image: url("http://res.cloudinary.com/dpcloudinary/image/upload/v1506186248/dots.png");
+	background-image: url("https://t1.daumcdn.net/movie/3a684ccaeb7aeac8e3f060ffe7249f7fe039443a");
     background-repeat: no-repeat;
-    background-position: 0% 50%;
+    background-position: center center;
+    background-size: contain;
 }
 #slideshow .two {
-    background-image: url("http://res.cloudinary.com/dpcloudinary/image/upload/v1506186248/gears.png");
+    background-image: url("https://cdn.lecturernews.com/news/photo/202303/120285_357871_4520.jpg");
     background-repeat: no-repeat;
-    background-position: 0% 50%;
+    background-position: center center;
+    background-size: contain;
 }
 #slideshow .three {
-    background-image: url("http://res.cloudinary.com/dpcloudinary/image/upload/v1506186248/splat.png");
+    background-image: url("https://t1.daumcdn.net/movie/bdec276db284e8c6d82f974cff11fa991ccd3f6b");
     background-repeat: no-repeat;
-    background-position: 0% 5%;
+	background-position: center center;
+    background-size: contain;
 }
 #slideshow .four {
-    background-image: url("http://res.cloudinary.com/dpcloudinary/image/upload/v1506186248/ray.png");
+    background-image: url("https://i.namu.wiki/i/cEw1e0KgUroaEx0m4ozyYlu9-hWFVO-f3GMPIVL-wCFhHcBSZ3UzQ4_uVrC70h6zpz-ZUOqrQYOPhshmFl6Slg.webp");
     background-repeat: no-repeat;
-    background-position: 0% 50%;
+    background-position: center center;
+    background-size: contain;
 }
 
 /* FORM ELEMENTS */
@@ -548,13 +522,14 @@ input {
     width: 100%;
     margin: 2em auto 0;
 }
+/* 네이버 로그인 밑에 a태그 때문에 생기는 줄 */
 .form-wrap a {
     color: #ccc;
     padding-bottom: 4px;
     border-bottom: 1px solid #5FD1C1;
 }
 .form-wrap a:hover {
-    color: #fff;
+    color: #555555;
 }
 .form-wrap .tabs {
     overflow: hidden;
@@ -576,11 +551,11 @@ input {
     text-align: center;
     font-weight: 400;
     display: block;
-    color: #999;
+    color: #ccc;
     border: 0;
  }
 .form-wrap .tabs h3 a.active {
-    color: #ccc;
+    color: #000000;
 }
 .form-wrap .tabs h3 a.active span {
     padding-bottom: 4px;
@@ -614,7 +589,7 @@ input {
     -moz-box-sizing: border-box;
     color: inherit;
     font-family: inherit;
-    color: #fff;
+    color: #000000;
 }
 .form-wrap form .button {
     margin: 1em 0;
@@ -782,16 +757,16 @@ input {
         background-size: auto;
     }
     #slideshow .one {
-        background-position: 50% 130%;
+        background-position: 50% 100%;
     }
     #slideshow .two {
-        background-position: 50% 200%;
+        background-position: 50% 100%;
     }
     #slideshow .three {
-        background-position: 50% 300%;
+        background-position: 50% 100%;
     }
     #slideshow .four {
-        background-position: -40% -80%;
+        background-position: 50% 100%;
     }
 
     /* CONTENT */
@@ -809,9 +784,9 @@ input {
     .terms, .recovery {
         position: absolute;
         width: 50%;
-        height: 440px;
+        height: 550px;
         float: left;
-        margin: 60px 0 0;
+        margin: 0px 0 0;
         -webkit-box-shadow: -3px 0px 45px -6px rgba(56,75,99,0.61);
         -moz-box-shadow: -3px 0px 45px -6px rgba(56,75,99,0.61);
         box-shadow: -3px 0px 45px -6px rgba(56,75,99,0.61);
@@ -877,30 +852,24 @@ input {
     }
 }
 /* LARGE VIEWPORT */
+/* 로그인 틀 크기 */
 @media only screen and (min-width: 60em) {
     /* WRAP */
     .wrap {
-        width: 900px;
-        height: 550px;
+        width: 1000px;
+        height: 700px;
     }
     /* CONTENT */
     .content, .content.full {
-        height: 550px;
+        height: 700px;
     }
     .terms, .recovery {
-        height: 490px;
+        height: 700px;
     }
-    /* SLIDESHOW */
-    #slideshow h2 {
-        margin: 4em 0 1em;
-        font-size: 3em;
-    }
-    #slideshow .four {
-        background-position: -82% -330%;
-    }
+    
     /* USER (FORM WRAPPER) */
     .user {
-        height: 550px;
+        height: 700px;
     }
     .form-wrap {
         margin: 5em auto 0;

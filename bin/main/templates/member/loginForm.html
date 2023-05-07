@@ -2,18 +2,45 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Responsive Sign Up &amp; Sign In Form, Terms of Service and Recover Password v1</title>
+  <title>로그인</title>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
   <link rel="stylesheet" href="/css/loginForm/style.css">
+  <link rel="stylesheet" href="/css/main/nav.css">
+  <style>
+  	body {
+  		background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/efb4855d-e702-43e5-9997-bba0154152e0/e126bdcb-28c1-441d-9fb4-0b1e5ef86f11/KR-ko-20230417-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+  		background-size: cover;
+  		background-position: center;
+  		}
+  </style>
+  	
+	<!-- 카카오 로그인 -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	
 	<!-- 네이버 로그인 -->
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	
 </head>
 <body>
-
+	<nav>
+		<a href="/">Home<a>
+				<ul th:if="${session.loginMember}">
+					<li><a href="http://localhost:9000/movie_search">검색</a></li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/mypage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
+				</ul>
+				<ul th:unless="${session.loginMember}">
+					<li><a href="http://localhost:9000/movie_search">검색</a></li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/login">로그인</a></li>
+				</ul>
+	</nav>
 <!-- partial:index.partial.html -->
 <!-- LOGIN MODULE -->
         <div class="login">
+            
             <div class="wrap">
                 <div id="toggle-wrap">
                     <div id="toggle-terms">
@@ -75,41 +102,21 @@
                 <!-- SLIDER -->
                 <div class="content">
                     <!-- LOGO -->
-                    <div class="logo">
-                        <a href="#"><img src="http://res.cloudinary.com/dpcloudinary/image/upload/v1506186248/logo.png" alt=""></a>
-                    </div>
                     <!-- SLIDESHOW -->
                     <div id="slideshow">
-                        <div class="one">
-                            <h2><span>EVENTS</span></h2>
-                            <p>Sign up to attend any of hundreds of events nationwide</p>
-                        </div>
-                        <div class="two">
-                            <h2><span>LEARNING</span></h2>
-                            <p>Thousands of instant online classes/tutorials included</p>
-                        </div>
-                        <div class="three">
-                            <h2><span>GROUPS</span></h2>
-                            <p>Create your own groups and connect with others that share your interests</p>
-                        </div>
-                        <div class="four">
-                            <h2><span>SHARING</span></h2>
-                            <p>Share your works and knowledge with the community on the public showcase section</p>
-                        </div>
+                        <div class="one"></div>
+                        <div class="two"></div>
+                        <div class="three"></div>
+                        <div class="four"></div>
                     </div>
                 </div>
                 <!-- LOGIN FORM -->
                 <div class="user">
-                    <!-- ACTIONS
-                    <div class="actions">
-                        <a class="help" href="#signup-tab-content">Sign Up</a><a class="faq" href="#login-tab-content">Login</a>
-                    </div>
-                    -->
                     <div class="form-wrap">
                         <!-- TABS -->
                     	<div class="tabs">
-                            <h3 class="login-tab"><a class="log-in active" href="#login-tab-content"><span>Login<span></a></h3>
-                    		<h3 class="signup-tab"><a class="sign-up" href="#signup-tab-content"><span>Sign Up</span></a></h3>
+                            <h3 class="login-tab"><a class="log-in active" href="#login-tab-content"><span>ログイン<span></a></h3>
+                    		<h3 class="signup-tab"><a class="sign-up" href="#signup-tab-content"><span>会員登録</span></a></h3>
                     	</div>
                         <!-- TABS CONTENT -->
                     	<div class="tabs-content">
@@ -122,7 +129,8 @@
                     				<input type="text" class="input" th:field="*{member_id}" autocomplete="off" placeholder="Email or Username">
                     				<input type="password" class="input" th:field="*{password}" autocomplete="off" placeholder="Password">
                     				<input type="submit" value="Login">
-                    				<div id="naver_id_login"></div>
+                    				<div id="naver_id_login"></div>                  
+									<a href='https://kauth.kakao.com/oauth/authorize?client_id=07801cd1c42179c89cc521c5f704f42b&redirect_uri=http://localhost:9000/&response_type=code'><img style="display: block; margin: 0;" height="40px" src="https://t1.daumcdn.net/cfile/tistory/99BEE8465C3D7D1214"/></a>
                     			</form>
                     			<div class="help-action">
                     				<p><i class="fa fa-arrow-left" aria-hidden="true"></i><a class="forgot" href="#">Forgot your password?</a></p>
@@ -145,11 +153,13 @@
                     	</div>
                 	</div>
                 </div>
+            
             </div>
         </div>
 <!-- partial -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src="/css/loginForm/script.js"></script>
 <script src="/css/loginForm/naverlogin.js"></script>
+		
 </body>
 </html>

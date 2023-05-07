@@ -1118,11 +1118,7 @@
       scrollBar: false,
       hybrid: false,
       licenseKey: '',
-      credits: {
-        "enabled": true,
-        "label": 'Made with fullPage.js',
-        "position": 'right'
-      },
+
       //scrolling
       css3: true,
       scrollingSpeed: 700,
