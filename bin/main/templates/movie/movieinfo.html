@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>게시글 읽기</title>
@@ -12,9 +12,8 @@ function hideTrailer() {
 	  const player = document.querySelector('#player').innerHTML = '';
 	}
 	 
-	
 	const API_KEY = 'dfcdb12192ff1bc68ebd64bb5f86f67e';
-	const MOVIE_ID = '502356';
+	const MOVIE_ID = '[[${movie.id}]]';
 	const API_URL = `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`;
 
 	function showTrailer() {
@@ -43,10 +42,7 @@ function hideTrailer() {
 		      }
 		    })
 		    .catch(error => console.error(error));
-		}
-	
-	
-	
+		}	
 </script>
 </head>
 <body>
@@ -68,6 +64,7 @@ function hideTrailer() {
 		<div class="details">
 			<h1 class="title" th:text="*{title}"></h1>
 			<p class="description" th:text="*{overview}"></p>
+			<p class="description" th:text="*{id}"></p>
 			<button class="play-button" id="play" onclick="showTrailer()">Play</button>
 			
 		</div>
