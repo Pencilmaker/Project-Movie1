@@ -148,3 +148,29 @@ nav {
     color: #333;
     text-decoration: none;
   }
+  
+  
+  
+  
+  
+  /*오버레이*/
+  .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+}
+
+.overlay iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.show {
+  display: block;
+}

@@ -4,6 +4,44 @@
 <meta charset="UTF-8">
 <title>게시글 읽기</title>
 <link rel="stylesheet" href="/css/movie/movieinfo.css">
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+
+function hideTrailer() {
+	  document.querySelector('.overlay').classList.remove('show');
+	  const player = document.querySelector('#player').innerHTML = '';
+	}
+	 
+	
+	const API_KEY = 'dfcdb12192ff1bc68ebd64bb5f86f67e';
+	const MOVIE_ID = '502356';
+	const API_URL = `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`;
+
+	function showTrailer() {
+	  fetch(API_URL)
+	    .then(response => response.json())
+	    .then(data => {
+	      const trailer = data.results.find(video => video.site === 'YouTube' && video.type === 'Trailer');
+	      const videoId = trailer ? trailer.key : null;
+	      if (videoId) {
+	        const player = new YT.Player('player', {
+	          height: '360',
+	          width: '640',
+	          videoId,
+	          events: {
+	            'onReady': function() {
+	              document.querySelector('.overlay').classList.add('show');
+	              player.playVideo();
+	            }
+	          }
+	        });
+	      }
+	    })
+	    .catch(error => console.error(error));
+	}
+
+	
+</script>
 </head>
 <body>
 	<nav>
@@ -23,8 +61,15 @@
 		<div class="details">
 			<h1 class="title" th:text="*{title}"></h1>
 			<p class="description" th:text="*{overview}"></p>
-			<button class="play-button">Play</button>
+			<button class="play-button" id="play" onclick="showTrailer()">Play</button>
+			
 		</div>
+		
+		
+	<div class="overlay" onclick="hideTrailer()">
+  	<div id="player"></div>
+	</div>
+		
 	</section>
 </body>
 </html>
