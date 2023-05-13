@@ -3,6 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>로그인</title>
+    <script>
+    	function loginCheck() {
+    		// 아이디 체크(4~20자리 사이)
+    		let member_id = $("*member_id");
+    		if (member_id.val().length < 4 || member_id.val().length > 20) {
+    			alert("아이디는 4 ~ 20자리 사이여야 합니다.");
+    			member_id.focus();
+    			return false;
+    		}
+    		
+        	// 패스워드 체크(4~20자리 사이)
+        	let password = $("*password");
+    		if (password.val().length < 4 || password.val().length > 20) {
+    			alert("패스워드는 4 ~ 20자리 사이여야 합니다.");
+    			password.focus();
+    			return false;
+    		}
+    		
+        	return true;
+    	}
+    </script>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
   <link rel="stylesheet" href="/css/loginForm/style.css">
   <link rel="stylesheet" href="/css/main/nav.css">
@@ -23,16 +44,32 @@
 	
 </head>
 <body>
-	<nav>
+				<nav>
 		<a href="/">Home<a>
 				<ul th:if="${session.loginMember}">
-					<li><a href="http://localhost:9000/movie_search">검색</a></li>
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
 					<li><a href="http://localhost:9000/movie_web">영화</a></li>
-					<li><a href="http://localhost:9000/mypage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/member/myPage">[[${session.loginMember.member_name}]]님</a></li>
 					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
 				</ul>
 				<ul th:unless="${session.loginMember}">
-					<li><a href="http://localhost:9000/movie_search">검색</a></li>
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
 					<li><a href="http://localhost:9000/movie_web">영화</a></li>
 					<li><a href="http://localhost:9000/member/login">로그인</a></li>
 				</ul>
@@ -122,7 +159,7 @@
                     	<div class="tabs-content">
                             <!-- TABS CONTENT LOGIN -->
                     		<div id="login-tab-content" class="active">
-                    			<form class="login-form" action="login" method="post" th:object="${loginForm}">
+                    			<form class="login-form" action="login" method="post" th:object="${loginForm}" onsubmit="return formCheck()">
 								    <div th:if="${#fields.hasGlobalErrors()}">
 								      <p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
 								    </div>

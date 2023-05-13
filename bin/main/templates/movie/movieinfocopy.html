@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>메인 홈</title>
+<link rel="stylesheet" href="/css/movie/movieinfo.css">
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+
+function hideTrailer() {
+    document.querySelector('.overlay').classList.remove('show');
+    const player = document.querySelector('#player').innerHTML = '';
+}
+
+const API_KEY = 'dfcdb12192ff1bc68ebd64bb5f86f67e';
+const MOVIE_ID = '[[${movie.movie_id}]]';
+const API_URL = `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`;
+
+function toggleFavorite() {
+	const movieId = '[[${movieAndGenre.movie.movie_id}]]';
+	const xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
+		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+			const favoriteButton = document.querySelector('.favorite-button');
+		}
+	};
+	xhr.open('POST', '/myPage/' + movieId + '?member_id=' + '[[${session.loginMember.member_name}]]', true);
+	xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	xhr.send(JSON.stringify({
+		movie_id: '[[${movieAndGenre.movie.movie_id}]]',
+		member_id: '[[${session.loginMember.member_name}]]'
+	}));
+}
+
+function showTrailer() {
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            const trailer = data.results.find(video => video.site === 'YouTube' && video.type === 'Trailer');
+            const videoId = trailer ? trailer.key : null;
+            if (videoId) {
+                const player = new YT.Player('player', {
+                    height: '360',
+                    width: '640',
+                    videoId,
+                    events: {
+                        'onReady': function() {
+                            const overlay = document.querySelector('.overlay');
+                            overlay.classList.add('show');
+                            player.playVideo();
+
+                            // 플레이 버튼 클릭 이벤트 등록
+                            const playBtn = document.querySelector('.play-button');
+                            playBtn.addEventListener('click', function() {
+                                overlay.classList.add('show');
+                                player.playVideo();
+                            });
+                        }
+                    }
+                });
+
+                // 오버레이 클릭 시 정지
+                const overlay = document.querySelector('.overlay');
+                overlay.addEventListener('click', function() {
+                    player.stopVideo();
+                    overlay.classList.remove('show');
+                });
+            }
+        })
+        .catch(error => console.error(error));
+}
+</script>
+<!-- 네비게이션 -->
+<link rel="stylesheet" type="text/css" href="/css/main/nav.css" />
+<!-- 웹페이지 -->
+<link rel="stylesheet" type="text/css" href="/css/movie/scroll.css" />
+</head>
+<body>
+	<nav>
+		<a href="/">Home<a>
+				<ul th:if="${session.loginMember}">
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/myPage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
+				</ul>
+				<ul th:unless="${session.loginMember}">
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/login">로그인</a></li>
+				</ul>
+	</nav>
+	<div id="fullpage">
+		<div class="section" id="section0">
+			<div class="movie-info" th:object="${movieAndGenre}">
+				<div class="poster">
+					<img  th:src="@{https://image.tmdb.org/t/p/w500/__${movieAndGenre.movie.poster_path}__}" alt="Movie Poster">
+				</div>
+
+				<div class="details">
+					<h1 class="title" th:text="*{movie.title}"></h1>
+					<button class="favorite-button" onclick="toggleFavorite()">즐겨찾기</button>
+					<button class="favorite-button" onclick="deleteFavorite(movieId)">즐겨찾기 제거</button>
+					<ul class="genre-list">
+						<li th:each="genre : ${movieAndGenre.genre}">
+						<span th:text="${genre.genre_name}"></span>
+						</li>
+					</ul> 
+					<p class="rating" th:text="|평점 : *{movie.vote_average}|">
+					<p class="description" th:text="*{movie.overview}"></p>
+					<button class="play-button" id="play" onclick="showTrailer()">Play</button>
+				</div>
+
+				<div class="overlay" onclick="hideTrailer()">
+					<div id="player"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section" id="section1">
+			<div class="upbar">
+				<ul class="menu">
+					<li onclick="showSection('cast')">등장인물</li>
+					<li onclick="showSection('allreply')">댓글</li>
+					<li onclick="showSection('stillcut')">스틸컷</li>
+				</ul>
+			</div>
+
+			<div class="container">
+				<section id="cast">
+					<h2>등장인물</h2>
+					<div>
+						<img
+							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+						<img
+							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+						<img
+							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+					</div>
+				</section>
+
+				<section id="allreply" class="hidden">
+					<h2>reply</h2>
+					<form th:action="@{/reply/{movie_id}(movie_id=*{movie_id})}" method="post" th:object="${reply}">
+					<input type="hidden" th:field="*{movie_id}">
+					<input type="hidden" th:field="*{member_id}">
+						<div>
+							<input type="text" th:field="*{content}" placeholder="댓글 내용을 입력하세요.">
+							<input type="submit" value="등록">
+						</div>
+					</form>
+					<table>
+						<tr>
+							<th>No</th>
+							<th>작성자</th>
+							<th>내용</th>
+							<th>작성일</th>
+						</tr>
+						<tr th:each="reply, replyStat: ${replies}">
+							<td th:text="${replyStat.count}"></td>
+							<td th:text="${reply.member_id}"></td>
+							<td th:text="${reply.content}"></td>
+							<td th:text="${#temporals.format(reply.created_time, 'yyyy-MM-dd HH:mm')}"></td>
+						</tr>
+					</table>
+					<div>
+
+					</div>
+				</section>
+
+				<section id="stillcut" class="hidden">
+					<h2>stillcut</h2>
+					<div>
+						<img
+							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+						<img
+							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+						<img
+							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+					</div>
+				</section>
+
+			</div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/css/main/scroll.js"></script>
+	<script src="/css/movie/movieinfo.js"></script>
+	<script type="text/javascript">
+		var myFullpage = new fullpage('#fullpage', {
+			sectionsColor : [ '#ffffff', '#ffffff' ],
+			css3 : false
+		});
+	</script>
+
+</body>
+</html>

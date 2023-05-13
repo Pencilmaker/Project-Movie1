@@ -45,18 +45,13 @@ abbr,acronym { border: 0;
 }
 
 /* 검색바 스타일 */ 
-.searchbox{
-	padding: 30px;
-}
-
 .searchbox input {
-	width: 20%;
-	height: 50px;
+	height: 25px;
 }
 
 .searchbox button {
 	width: 50px;
-	height: 50px;
+	height: 25px;
 	color: #000000;
 
 }
@@ -64,9 +59,9 @@ abbr,acronym { border: 0;
 /* 메인 섹션 스타일 */ 
   .main {
 	background-color: #151414;
-	text-align: center;
 	color: #fff;
 	padding: 400px;
+	margin: 20px;
 	box-sizing: border-box;
 	display: flex;
 	transform-style: preserve-3d;
@@ -100,7 +95,7 @@ input[type=radio] {
   }
   
   .card {
-	position: absolute;
+	position: relative;
 	width: 300px;
 	height: 0;
 	left: 0;
@@ -126,31 +121,31 @@ input[type=radio] {
   }
   
   #item-1:checked ~ .cards #song-4, #item-2:checked ~ .cards #song-5, #item-3:checked ~ .cards #song-1,  #item-4:checked ~ .cards #song-2, #item-5:checked ~ .cards #song-3 {
-	transform: translatex(-120%) scale(1);
-	opacity: 1;
+	transform: translatex(-140%) scale(1);
+	opacity: 11;
 	z-index: 1;
   }
   
   #item-1:checked ~ .cards #song-5, #item-2:checked ~ .cards #song-1, #item-3:checked ~ .cards #song-2,  #item-4:checked ~ .cards #song-3, #item-5:checked ~ .cards #song-4 {
-	transform: translatex(-60%) scale(1.2);
+	transform: translatex(-80%) scale(1.2);
 	opacity: 1;
 	z-index: 2;
   }
   
   #item-1:checked ~ .cards #song-1, #item-2:checked ~ .cards #song-2, #item-3:checked ~ .cards #song-3, #item-4:checked ~ .cards #song-4, #item-5:checked ~ .cards #song-5 {
-	transform: translatex(0) scale(1.5);
+	transform: translatex(0) scale(1.7);
 	opacity: 1;
 	z-index: 3;
   }
   
   #item-1:checked ~ .cards #song-2, #item-2:checked ~ .cards #song-3, #item-3:checked ~ .cards #song-4, #item-4:checked ~ .cards #song-5, #item-5:checked ~ .cards #song-1 {
-	transform: translatex(60%) scale(1.2);
+	transform: translatex(80%) scale(1.2);
 	opacity: 1;
 	z-index: 2;
   }
   
   #item-1:checked ~ .cards #song-3, #item-2:checked ~ .cards #song-4, #item-3:checked ~ .cards #song-5, #item-4:checked ~ .cards #song-1, #item-5:checked ~ .cards #song-2 {
-	transform: translatex(120%) scale(1);
+	transform: translatex(140%) scale(1);
 	opacity: 1;
 	z-index: 1;
   }
@@ -165,6 +160,7 @@ input[type=radio] {
 	text-align: left;
 	margin: 80px;
 	margin-bottom: 0px;
+	color: black;
 }
 
 #movies {
@@ -492,7 +488,7 @@ h1{
 }
 
 #section2{
-	background-image: linear-gradient(128deg,#fc40ff,#543fff);
+	background-image: linear-gradient(128deg,#ffffff,#ffffff);
 }
 
 #section3{

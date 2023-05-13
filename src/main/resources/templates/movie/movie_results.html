@@ -9,17 +9,33 @@
 <body>
 	<nav>
 		<a href="/">Home<a>
-		<ul th:if="${session.loginMember}">
-			<li><a href="http://localhost:9000/movie_search">검색</a></li>
-			<li><a href="http://localhost:9000/movie_web">영화</a></li>
-			<li><a href="http://localhost:9000/mypage">[[${session.loginMember.member_name}]]님</a></li>
-			<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
-		</ul>
-		<ul th:unless="${session.loginMember}">
-			<li><a href="http://localhost:9000/movie_search">검색</a></li>
-			<li><a href="http://localhost:9000/movie_web">영화</a></li>
-			<li><a href="http://localhost:9000/member/login">로그인</a></li>
-		</ul>
+				<ul th:if="${session.loginMember}">
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/myPage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
+				</ul>
+				<ul th:unless="${session.loginMember}">
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/login">로그인</a></li>
+				</ul>
 	</nav>
 
 	<div class="container">

@@ -5,21 +5,23 @@
 <mapper namespace="com.movie.repository.MovieMapper">
     <!--  게시글 저장  -->
     <insert id="saveId">
-        insert into movie_id(
-			id,
+        insert into movie(
+			movie_id,
 			title,
 			overview,
-			poster_path
+			poster_path,
+			vote_average
         ) values (
-			#{id},
+			#{movie_id},
 			#{title},
 			#{overview},
-			#{poster_path}
+			#{poster_path},
+			#{vote_average}
         )
     </insert>
     
     <insert id="saveGenre">
-        insert into genres(
+        insert into genre(
 			movie_id,
 			genre_id,
 			genre_name
@@ -30,8 +32,12 @@
         )
     </insert>
     
-    <select id="findId" resultType="movie">
-    	select * from movie_id where id = #{id}
+    <select id="movieFindId" resultType="movie">
+    	select * from movie where movie_id = #{movie_id}
+    </select>
+    
+    <select id="genreFindId" resultType="genre">
+    	select * from genre where movie_id = #{movie_id}
     </select>
     	
 </mapper>

@@ -13,7 +13,7 @@ function hideTrailer() {
 }
 
 const API_KEY = 'dfcdb12192ff1bc68ebd64bb5f86f67e';
-const MOVIE_ID = '[[${movie.id}]]';
+const MOVIE_ID = '[[${movie.movie_id}]]';
 const API_URL = `https://api.themoviedb.org/3/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`;
 
 function showTrailer() {
@@ -53,18 +53,67 @@ function showTrailer() {
         })
         .catch(error => console.error(error));
 }
+
+function toggleFavorite() {
+	const movieId = '[[${movieAndGenre.movie.movie_id}]]';
+	const xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
+		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+			const favoriteButton = document.querySelector('.favorite-button');
+		}
+	};
+	xhr.open('POST', '/myPage/' + movieId + '?member_id=' + '[[${session.loginMember.member_name}]]', true);
+	xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	xhr.send(JSON.stringify({
+		movie_id: '[[${movieAndGenre.movie.movie_id}]]',
+		member_id: '[[${session.loginMember.member_name}]]'
+	}));
+}
+
+function deleteFavorite(movieId) {
+	const xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
+		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+			alert('영화가 즐겨찾기 목록에서 제거되었습니다!');
+			window.location.reload();
+		}
+	};
+	xhr.open('DELETE', '/myPage/' + movie_id);
+	xhr.send();
+}
 </script>
 </head>
 <body>
 	<nav>
 		<a href="/">Home<a>
-			<ul>
-			  <li><a href="http://localhost:9000/movie_search">검색</a></li>
-			  <li><a href="http://localhost:9000/movie_web">영화</a></li>
-			  <li th:if="${session.loginMember}"><a href="http://localhost:9000/member/logout">[[${session.loginMember.member_name}]]님</a></li>
-			  <li th:unless="${session.loginMember}"><a href="http://localhost:9000/member/login">로그인</a></li>
-			</ul>
-	  </nav>
+				<ul th:if="${session.loginMember}">
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/myPage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
+				</ul>
+				<ul th:unless="${session.loginMember}">
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/login">로그인</a></li>
+				</ul>
+	</nav>
 	<section class="movie-info" th:object="${movie}">
 		<div class="poster">
 			<img
@@ -75,14 +124,14 @@ function showTrailer() {
 			<h1 class="title" th:text="*{title}"></h1>
 			<p class="description" th:text="*{overview}"></p>
 			<button class="play-button" id="play" onclick="showTrailer()">Play</button>
-			
+
 		</div>
-		
-		
-	<div class="overlay" onclick="hideTrailer()">
-  	<div id="player"></div>
-	</div>
-		
+
+
+		<div class="overlay" onclick="hideTrailer()">
+			<div id="player"></div>
+		</div>
+
 	</section>
 </body>
 </html>

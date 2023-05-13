@@ -89,7 +89,7 @@ public class MemberController {
 			// BindingResult 객체에 GlobalError 를 발생시킨다.
 			result.reject("loginError", "아이디가 없거나 패스워드가 다릅니다.");
 			// member/loginForm.html 페이지로 돌아간다.
-			return "member/loginForm";
+			return "redirect:/member/loginForm";
 		}
 
 		// Request 객체에서 Session 객체를 꺼내온다.
@@ -144,5 +144,5 @@ public class MemberController {
 
 		return "redirect:/";
 	}
-
+	
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.repository.FavoriteMapper">
+
+	<insert id="addFavorite">
+		insert into favorites(
+		member_id,
+		movie_id
+		) values (
+		#{member_id},
+		#{movie_id}
+		)
+	</insert>
+
+	<select id="findFavorite" resultType="favorite">
+		select * from favorites where movie_id = #{movie_id} and member_id = #{member_id}
+	</select>
+
+	<select id="removeFavorite" resultType="favorite">
+		delete from favorites where movie_id = #{movie_id} and member_id = #{member_id}
+	</select>
+
+	<select id="findFavorites" resultType="join">
+		select f.member_id,	f.movie_id, m.title, m.poster_path
+		from favorites f
+		join movie m ON
+		f.movie_id = m.movie_id
+		where f.member_id = #{member_id}
+	</select>
+
+
+
+
+</mapper>

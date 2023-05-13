@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>마이페이지</title>
+<link rel="stylesheet" href="/css/loginForm/myPage.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+</head>
+<body>
+	<nav>
+		<a href="/">Home<a>
+				<ul th:if="${session.loginMember}">
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/myPage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
+				</ul>
+				<ul th:unless="${session.loginMember}">
+					<li>
+						<div class="searchbox">
+							<form target="_blank" action="/movie_results">
+								<input type="search" placeholder="검색할 내용을 입력하세요"
+									name="searchinput">
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</li>
+					<li><a href="http://localhost:9000/movie_web">영화</a></li>
+					<li><a href="http://localhost:9000/member/login">로그인</a></li>
+				</ul>
+	</nav>
+
+	<div class="main">
+		<h1>여기에 개인정보 표시</h1>
+		<div>아이디 : [[${session.loginMember.member_name}]]님</div>
+	</div>
+
+	<div class="container">
+		<div class="sidebar">
+			<ul class="menu">
+				<li onclick="showSection('myPosts')">내가 쓴 글</li>
+				<li onclick="showSection('likedPosts')">좋아요 누른 게시물</li>
+				<li onclick="showSection('favoriteMovies')">즐겨찾기 누른 영상</li>
+				<li onclick="showSection('watchedMovies')">최근 확인한 영상</li>
+				<li onclick="showSection('etc')">기타</li>
+			</ul>
+		</div>
+
+		<section id="myPosts">
+			<h2>내가 쓴 글</h2>
+			<table>
+				<tr>
+					<th>No</th>
+					<th>제목</th>
+					<th>조회수</th>
+				</tr>
+				<tr id="tableList">
+					<td>(ex)1</td>
+					<td>(ex)테스트</td>
+					<td>(ex)100</td>
+				</tr>
+			</table>
+		</section>
+
+		<section id="likedPosts" class="hidden">
+			<h2>좋아요 누른 게시물</h2>
+			<ul>
+				<li>첫 번째 게시물</li>
+				<li>두 번째 게시물</li>
+				<li>세 번째 게시물</li>
+			</ul>
+		</section>
+
+		<section id="favoriteMovies" class="hidden">
+			<h2>My Favorite Movies</h2>
+			<ul th:each="joinMovie, joinMovieStat: ${joinMovies}">
+			    <li>
+			      <a th:href="@{/movie/movie?movie_id={movie_id}(movie_id=${joinMovie.movie_id})}">
+			        <div class="movie-info">
+			          <img style="width: 50px; height: 100px;"class="movie-poster" th:src="@{https://image.tmdb.org/t/p/w500/__${joinMovie.poster_path}__}" alt="" />
+			          <span class="movie-title" th:text="${joinMovie.title}"></span>
+			        </div>
+			      </a>
+			    </li>
+			</ul>
+		</section>
+
+		<section id="watchedMovies" class="hidden">
+			<h2>기타</h2>
+			<ul>
+				<li>첫 번째 게시물</li>
+				<li>두 번째 게시물</li>
+				<li>세 번째 게시물</li>
+			</ul>
+		</section>
+
+		<section id="etc" class="hidden">
+			<h2>기타</h2>
+			<ul>
+				<li>첫 번째 게시물</li>
+				<li>두 번째 게시물</li>
+				<li>세 번째 게시물</li>
+			</ul>
+		</section>
+
+	</div>
+
+	<!-- javascript 코드 -->
+	<script src="/css/loginForm/myPage.js"></script>
+</body>
+</html>

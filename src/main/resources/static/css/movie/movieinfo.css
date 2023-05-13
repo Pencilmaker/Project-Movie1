@@ -1,175 +1,302 @@
-/* Navigation bar styles */
+/* 이전 스타일들을 추가로 유지하고, 사이드바를 왼쪽으로 옮깁니다. */
+body {
+	margin: 200px;
+	margin-bottom: 100px;
+	margin-top: 100px;
+}
+
+/* 상단 메인 개인정보 표시 */
+.main {
+	max-width: 100%;
+	height: 300px;
+	margin-top: 100px;
+	background-color: #444444;
+}
+/* 여기까지 */
+.container {
+	max-width: 100%;
+	height: 600px;
+	display: flex;
+	flex-direction: row; /* 변경: 가로 방향으로 배치 */
+	background-color: #dddde5;
+	justify-content: center; /* 변경: 가로 중앙 정렬 */
+	margin:100px;
+	margin-top:10px;
+}
+
+.upbar {
+	display: flex;
+	justify-content: center;
+	background-color: #f1f1f1;
+	font-size: 20px;
+	text-align: center;
+	align-items: center;
+	margin: 100px; /* 추가: 가로바 목록의 margin 제거 */
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.menu {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+}
+
+.menu li {
+	margin: 20px;
+	cursor: pointer;
+}
+
+section {
+	margin-top: 20px;
+}
+
+section.hidden {
+	display: none;
+}
+
+/* div.container 내부 설정 */
+div.container section {
+	margin: 20px;
+}
+
+.container section ul{
+	background-color: #ffffff;
+	margin: 10px;
+}
+
+div.container section li {
+	margin-bottom: 10px;
+}
+
+div.container #allreply div {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+div.container #allreply #reply{
+	width: 700px;
+	height: 100px;
+}
+
+div.container #allreply #button{
+	width: 50px;
+	height: 50px;
+}
+
+div.container section img {
+	width: 10%;
+	height: 10%;
+	margin: 10px;
+}
+
+div.container section table {
+	width: 700px;
+	text-align: center;
+	background-color: #ffffff;
+}
+/* 여기까지 */
+.section-container {
+	flex: 1;
+	margin-left: 20px;
+}
+
+.menu {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu li {
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+section.hidden {
+	display: none;
+}
+
+/* 네비게이션바 */
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #141414;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    box-sizing: border-box;
-    z-index: 9999;
-  }
-  
-  nav a {
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-  }
-  
-  nav ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav ul li {
-    margin-left: 20px;
-  }
-  
-  nav ul li:first-child {
-    margin-left: 0;
-  }
-  
-  /* Movie information section styles */
-  .movie-info {
-    display: flex;
-    margin: 100px auto;
-    width: 80%;
-  }
-  
-  .poster {
-    margin-right: 40px;
-    flex: 0 0 30%;
-  }
-  
-  .poster img {
-    max-width: 100%;
-  }
-  
-  .details {
-    flex: 1;
-  }
-  
-  .title {
-    font-size: 48px;
-    margin: 0 0 10px 0;
-  }
-  
-  .rating {
-    font-size: 24px;
-    margin: 0 0 10px 0;
-    color: #e50914;
-  }
-  
-  .description {
-    font-size: 18px;
-    margin: 0 0 20px 0;
-  }
-  
-  .genre-list {
-    display: flex;
-    margin: 0 0 20px 0;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .genre-list li {
-    margin-right: 10px;
-    font-size: 16px;
-    color: #b3b3b3;
-  }
-  
-  .play-button {
-    display: block;
-    width: 200px;
-    height: 60px;
-    margin-top: 30px;
-    background-color: #e50914;
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .play-button:hover {
-    background-color: #ff0a16;
-  }
-  
-  /* Footer styles */
-  footer {
-    background-color: #f3f3f3;
-    padding: 20px;
-  }
-  
-  .footer-links {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .footer-links div {
-    margin-right: 40px;
-  }
-  
-  .footer-links a {
-    display: block;
-    color: #333;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-decoration: none;
-  }
-  
-  .footer-bottom {
-    display: flex;
-    align-items: center;
-  }
-  
-  .footer-bottom img {
-    width: 80px;
-    margin-right: 20px;
-  }
-  
-  .footer-bottom p {
-    margin: 0;
-    font-size: 12px;
-    color: #333;
-  }
-  
-  .footer-bottom a {
-    margin-left: auto;
-    font-size: 14px;
-    color: #333;
-    text-decoration: none;
-  }
-  
-  
-  
-  
-  /*오버레이*/
-  .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #141414;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 20px;
+	box-sizing: border-box;
+	z-index: 9999;
+}
+
+nav a {
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+nav a:hover {
+	color: #e50914;
+}
+
+nav ul {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li {
+	margin-left: 20px;
+}
+
+nav ul li:first-child {
+	margin-left: 0;
+}
+/* 여기까지 */
+
+/* Movie information section styles */
+.movie-info {
+	display: flex;
+	margin: 100px auto;
+	width: 80%;
+}
+
+.poster {
+	margin-right: 40px;
+	flex: 0 0 30%;
+}
+
+.poster img {
+	max-width: 100%;
+}
+
+.details {
+	flex: 1;
+}
+
+.title {
+	font-size: 48px;
+	margin: 0 0 10px 0;
+}
+
+.rating {
+	font-size: 24px;
+	margin: 0 0 10px 0;
+	color: #e50914;
+}
+
+.description {
+	font-size: 18px;
+	margin: 0 0 20px 0;
+}
+
+.genre-list {
+	display: flex;
+	margin: 0 0 20px 0;
+	padding: 0;
+	list-style: none;
+}
+
+.genre-list li {
+	margin-right: 10px;
+	font-size: 16px;
+	color: #b3b3b3;
+}
+
+.play-button {
+	display: block;
+	width: 200px;
+	height: 60px;
+	margin-top: 30px;
+	background-color: #e50914;
+	color: #fff;
+	font-size: 24px;
+	font-weight: bold;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.play-button:hover {
+	background-color: #ff0a16;
+}
+
+/* Footer styles */
+footer {
+	background-color: #f3f3f3;
+	padding: 20px;
+}
+
+.footer-links {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.footer-links div {
+	margin-right: 40px;
+}
+
+.footer-links a {
+	display: block;
+	color: #333;
+	margin-bottom: 10px;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.footer-bottom {
+	display: flex;
+	align-items: center;
+}
+
+.footer-bottom img {
+	width: 80px;
+	margin-right: 20px;
+}
+
+.footer-bottom p {
+	margin: 0;
+	font-size: 12px;
+	color: #333;
+}
+
+.footer-bottom a {
+	margin-left: auto;
+	font-size: 14px;
+	color: #333;
+	text-decoration: none;
+}
+
+/*오버레이*/
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: none;
 }
 
 .overlay iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .show {
-  display: block;
+	display: block;
+}
+
+input#content {
+	width: 650px;
+	height: 100px;
 }

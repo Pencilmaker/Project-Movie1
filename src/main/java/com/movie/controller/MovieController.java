@@ -1,5 +1,7 @@
 package com.movie.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,10 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.movie.model.Genre;
 import com.movie.model.Movie;
 import com.movie.model.MovieAndGenre;
+import com.movie.model.member.Member;
+import com.movie.model.reply.Reply;
 import com.movie.repository.MovieMapper;
+import com.movie.repository.ReplyMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,16 +30,17 @@ import lombok.extern.slf4j.Slf4j;
 public class MovieController {
 	
 	private final MovieMapper movieMapper;
+	private final ReplyMapper replyMapper;
 	
-	@PostMapping("{id}")
+	@PostMapping("{movie_id}")
 	public ResponseEntity<String> saveMovie(@RequestBody MovieAndGenre movieAndGenre) {
 	    log.info("post에 movieAndGenre: {}", movieAndGenre);
 	    log.info("genre 사이즈: {}", movieAndGenre.getGenre().size());
 		Movie movie = movieAndGenre.getMovie();
-	    log.info("id: {}", movie.getId());
+	    log.info("id: {}", movie.getMovie_id());
 	    log.info("post에 movie: {}", movie);
 
-	    if (movieMapper.findId(movie.getId()) == null) {
+	    if (movieMapper.movieFindId(movie.getMovie_id()) == null) {
 	        movieMapper.saveId(movie);
 	        for(int i = 0; i < movieAndGenre.getGenre().size(); i++) {
 	        	log.info("{}", movieAndGenre.getGenre().get(i));
@@ -47,17 +55,47 @@ public class MovieController {
 	}
 
 	
-	@GetMapping("{id}")
+	@GetMapping("{movie_id}")
 	public String movieInfo(
-			@RequestParam String id, Model model) {
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam Long movie_id, Model model) {
 		log.info("getmapping /movie 시작");
-		log.info("id: {}", id);
-		Movie movie = movieMapper.findId(id);
-		log.info("movie: {}", movie);	
+		log.info("movie_id: {}", movie_id);
 		
+		// movie_id로 선택
+		Movie movie = movieMapper.movieFindId(movie_id);
+		log.info("movie: {}", movie);
 		model.addAttribute("movie", movie);
+		
+		// movie_id에 맞는 장르들 검색
+		List<Genre> genre = movieMapper.genreFindId(movie_id);
+		log.info("get에 genre: {}", genre);
+		
+		// MovieAndGenre에 빈 껍데기 만들기
+		MovieAndGenre mag = new MovieAndGenre();
+		
+		// MovieAndGenre에 집어넣기
+		mag.setMovie(movie);
+		mag.setGenre(genre);
+		log.info("GET MAG:{}", mag);
+		model.addAttribute("movieAndGenre", mag);
+		
+		// Reply 빈 껍데기 만들기
+		Reply reply = new Reply();
+		reply.setMovie_id(movie_id);
+		reply.setMember_id(loginMember.getMember_id());
+		
+		// Reply에 집어넣기
+		model.addAttribute("reply", reply);
+		
+		// Replies 가져오기
+		List<Reply> replies = replyMapper.findReplies(movie_id);
+		log.info("replies: {}", replies);
+		
+		// replies 집어넣기
+		model.addAttribute("replies", replies);
 		  
-		return "movie/movieinfo";
+		return "movie/movieinfocopy";
 	}
 	
 }
