@@ -8,6 +8,7 @@
         <typeAlias type="com.movie.model.Movie" alias="movie"/>
         <typeAlias type="com.movie.model.JoinMovie" alias="join"/>
         <typeAlias type="com.movie.model.Favorite" alias="favorite"/>
+        <typeAlias type="com.movie.model.Cast" alias="cast"/>
         <typeAlias type="com.movie.model.member.Member" alias="member"/>
         <typeAlias type="com.movie.model.reply.Reply" alias="reply"/>
     </typeAliases>

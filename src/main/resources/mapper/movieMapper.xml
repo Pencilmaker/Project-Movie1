@@ -20,7 +20,25 @@
         )
     </insert>
     
-    <insert id="saveGenre">
+    <insert id="saveCast">
+        insert into cast(
+			movie_id,
+			actor_id,
+			actor_name,
+			profile_path,
+			movie_character,
+			character_order
+        ) values (
+			#{movie_id},
+			#{actor_id},
+			#{actor_name},
+			#{profile_path},
+			#{movie_character},
+			#{character_order}
+        )
+    </insert>
+    
+        <insert id="saveGenre">
         insert into genre(
 			movie_id,
 			genre_id,
@@ -40,4 +58,7 @@
     	select * from genre where movie_id = #{movie_id}
     </select>
     	
+    <select id="castFindId" resultType="cast">
+    	select * from cast where movie_id = #{movie_id}
+    </select>
 </mapper>

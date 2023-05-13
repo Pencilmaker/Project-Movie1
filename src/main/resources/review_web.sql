@@ -32,17 +32,27 @@ create table favorites (
     member_id varchar2(100)
 );
 
+create table cast(
+    movie_id number(10),
+    actor_id number(30),
+    actor_name varchar2(1000),
+    profile_path varchar2(1000),
+    movie_character varchar2(100),
+    character_order number(10)
+);
+
 select * from member;
 select * from genre;
 select * from movie;
 select * from reply;
 select * from favorites;
-
+select * from cast;
 
 
 drop table movie;
 drop table genre;
 drop table reply;
 drop table favorites;
+drop table cast;
 
 commit;

@@ -111,7 +111,7 @@ function showTrailer() {
 		<div class="section" id="section0">
 			<div class="movie-info" th:object="${movieAndGenre}">
 				<div class="poster">
-					<img  th:src="@{https://image.tmdb.org/t/p/w500/__${movieAndGenre.movie.poster_path}__}" alt="Movie Poster">
+					<img th:src="@{https://image.tmdb.org/t/p/w500/__${movieAndGenre.movie.poster_path}__}" alt="Movie Poster">
 				</div>
 
 				<div class="details">
@@ -147,12 +147,7 @@ function showTrailer() {
 				<section id="cast">
 					<h2>등장인물</h2>
 					<div>
-						<img
-							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
-						<img
-							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
-						<img
-							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+						<img th:each="cast, castStat: ${casts}" th:src="@{https://image.tmdb.org/t/p/w500/__${cast.profile_path}__}" th:text="${cast.actor_name}" alt="Movie Poster">
 					</div>
 				</section>
 
@@ -188,12 +183,9 @@ function showTrailer() {
 				<section id="stillcut" class="hidden">
 					<h2>stillcut</h2>
 					<div>
-						<img
-							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
-						<img
-							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
-						<img
-							src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+						<img src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+						<img src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
+						<img src="https://image.tmdb.org/t/p/w500/6B9hny2s7frxtbRqrHqOT7ESB4A.jpg">
 					</div>
 				</section>
 

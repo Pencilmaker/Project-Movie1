@@ -5,7 +5,8 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class MovieAndGenre {
+public class MovieInfos {
     private Movie movie;
-    private List<Genre> genre;       
+    private List<Genre> genre;
+    private List<Cast> cast;
 }

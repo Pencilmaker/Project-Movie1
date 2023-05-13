@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.movie.model.Cast;
 import com.movie.model.Genre;
 import com.movie.model.Movie;
-import com.movie.model.MovieAndGenre;
+import com.movie.model.MovieInfos;
 import com.movie.model.member.Member;
 import com.movie.model.reply.Reply;
 import com.movie.repository.MovieMapper;
@@ -33,21 +34,35 @@ public class MovieController {
 	private final ReplyMapper replyMapper;
 	
 	@PostMapping("{movie_id}")
-	public ResponseEntity<String> saveMovie(@RequestBody MovieAndGenre movieAndGenre) {
-	    log.info("post에 movieAndGenre: {}", movieAndGenre);
-	    log.info("genre 사이즈: {}", movieAndGenre.getGenre().size());
-		Movie movie = movieAndGenre.getMovie();
+	public ResponseEntity<String> saveMovie(@RequestBody MovieInfos movieInfos) {
+	    log.info("post에 movieInfos: {}", movieInfos);
+	    log.info("genre 사이즈: {}", movieInfos.getGenre().size());
+	    log.info("cast 사이즈: {}", movieInfos.getCast().size());
+	    
+		Movie movie = movieInfos.getMovie();
 	    log.info("id: {}", movie.getMovie_id());
 	    log.info("post에 movie: {}", movie);
-
+	    
+	    // movie의 중복 내용 확인
 	    if (movieMapper.movieFindId(movie.getMovie_id()) == null) {
-	        movieMapper.saveId(movie);
-	        for(int i = 0; i < movieAndGenre.getGenre().size(); i++) {
-	        	log.info("{}", movieAndGenre.getGenre().get(i));
-	        	movieMapper.saveGenre(movieAndGenre.getGenre().get(i));
+	    	
+	    	// null일 경우 movie의 정보를 저장
+	    	movieMapper.saveId(movie);
+	    	
+	        // genre의 정보를 for문으로 저장
+	        for(int i = 0; i < movieInfos.getGenre().size(); i++) {
+	        	log.info("{}", movieInfos.getGenre().get(i));
+	        	movieMapper.saveGenre(movieInfos.getGenre().get(i));
 	        }
-//	        movieMapper.saveGenre(genres);
-	        log.info("등록했습니다.");
+	        log.info("genre의 정보를 등록했습니다.");
+	        
+	        // cast의 정보를 for문으로 저장
+	        for(int i = 0; i < movieInfos.getCast().size(); i++) {
+	        	log.info("{}", movieInfos.getCast().get(i));
+	        	movieMapper.saveCast(movieInfos.getCast().get(i));
+	        }
+	        log.info("cast의 정보를 등록했습니다.");
+	        
 	    } else {
 	        log.info("이미 등록된 id입니다.");
 	    }
@@ -72,7 +87,7 @@ public class MovieController {
 		log.info("get에 genre: {}", genre);
 		
 		// MovieAndGenre에 빈 껍데기 만들기
-		MovieAndGenre mag = new MovieAndGenre();
+		MovieInfos mag = new MovieInfos();
 		
 		// MovieAndGenre에 집어넣기
 		mag.setMovie(movie);
@@ -94,7 +109,12 @@ public class MovieController {
 		
 		// replies 집어넣기
 		model.addAttribute("replies", replies);
-		  
+		
+		// movie_id로 Cast 찾기
+		List<Cast> casts = movieMapper.castFindId(movie_id);
+		log.info("casts: {}", casts);
+		model.addAttribute("casts", casts);
+		
 		return "movie/movieinfocopy";
 	}
 	
