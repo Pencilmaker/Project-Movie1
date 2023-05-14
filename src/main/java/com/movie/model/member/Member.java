@@ -8,5 +8,7 @@ public class Member {
     private String password;
     private String member_name;
     private String birth;
-    
+    private String email;
+    private String question;
+    private String answer;
 }

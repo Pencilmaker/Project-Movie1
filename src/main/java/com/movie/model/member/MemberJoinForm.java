@@ -14,6 +14,9 @@ public class MemberJoinForm {
     @NotBlank
     private String member_name;
     private String birth;
+    private String email;
+    private String question;
+    private String answer;
 
     public static Member toMember(MemberJoinForm memberJoinForm) {
         Member member = new Member();
@@ -21,6 +24,9 @@ public class MemberJoinForm {
         member.setPassword(memberJoinForm.getPassword());
         member.setMember_name(memberJoinForm.getMember_name());
         member.setBirth(memberJoinForm.getBirth());
+        member.setEmail(memberJoinForm.getEmail());
+        member.setQuestion(memberJoinForm.getQuestion());
+        member.setAnswer(memberJoinForm.getAnswer());
         return member;
     }
 }

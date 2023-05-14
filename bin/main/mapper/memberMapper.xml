@@ -9,12 +9,18 @@
 			member_id,
 			password,
 			member_name,
-			birth
+			birth,
+			email,
+			question,
+			answer
         ) values (
 			#{member_id},
 			#{password},
 			#{member_name},
-			#{birth}
+			#{birth},
+			#{email},
+			#{question},
+			#{answer}
         )
     </insert>
     

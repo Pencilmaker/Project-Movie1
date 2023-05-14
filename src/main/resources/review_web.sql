@@ -10,7 +10,10 @@ create table member(
     member_id varchar(100) primary key,
     password varchar(20) not null,
     member_name varchar(20) not null,
-    birth number(8) not null
+    birth number(8) not null,
+    email varchar2(255),
+    question varchar2(1000),
+    answer varchar2(300)
 );
 
 create table genre(

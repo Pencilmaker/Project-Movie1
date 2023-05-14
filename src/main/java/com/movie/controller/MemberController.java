@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.movie.model.member.Find;
 import com.movie.model.member.LoginForm;
 import com.movie.model.member.Member;
 import com.movie.model.member.MemberJoinForm;
@@ -89,7 +92,7 @@ public class MemberController {
 			// BindingResult 객체에 GlobalError 를 발생시킨다.
 			result.reject("loginError", "아이디가 없거나 패스워드가 다릅니다.");
 			// member/loginForm.html 페이지로 돌아간다.
-			return "redirect:/member/loginForm";
+			return "redirect:/member/login";
 		}
 
 		// Request 객체에서 Session 객체를 꺼내온다.
@@ -105,10 +108,8 @@ public class MemberController {
 
 	// 네이버 로그인 & 회원가입
 	@PostMapping("naversignUp")
-	public String naverlogin(@Validated @ModelAttribute("joinForm") MemberJoinForm joinForm,
-			BindingResult result,
-			HttpServletResponse response,
-			HttpServletRequest request) {
+	public String naverlogin(@Validated @ModelAttribute("joinForm") MemberJoinForm joinForm, BindingResult result,
+			HttpServletResponse response, HttpServletRequest request) {
 
 		log.info("입력한 값: {}", joinForm);
 
@@ -133,7 +134,6 @@ public class MemberController {
 
 	}
 
-
 	// 로그아웃
 	@GetMapping("logout")
 	public String logout(HttpServletRequest request) {
@@ -144,5 +144,48 @@ public class MemberController {
 
 		return "redirect:/";
 	}
-	
+
+	// 비밀번호 찾기 시 아이디 확인
+    @PostMapping("/findid")
+    public ResponseEntity<String> findMember(@RequestParam String member_id) {
+        log.info("member_id: {}", member_id);
+        
+        Member member = memberMapper.findMember(member_id);
+        
+        log.info("member: {}", member);
+        
+        if (member != null) {
+            return ResponseEntity.ok("true");
+            
+        } else {
+        	
+            return ResponseEntity.ok("false");
+        }        
+
+    }
+    
+	// 비밀번호 획득
+    @PostMapping("/findfwd")
+    public ResponseEntity<Find> findMember(@RequestParam String member_id, String question, String answer) {
+        log.info("member_id: {}, question: {}, answer: {}", member_id, question, answer);
+        
+        Member member = memberMapper.findMember(member_id);
+        log.info("member: {}", member);
+        
+        if (member.getQuestion().equals(question) && member.getAnswer().equals(answer)) {
+        	Find find = new Find();
+        	find.setSuccess(true);
+        	find.setPassword(member.getPassword());
+            return ResponseEntity.ok(find);
+            
+        } else {
+        	Find find = new Find();
+        	find.setSuccess(false);
+        	find.setPassword(null);
+            return ResponseEntity.ok(find);
+
+        }        
+
+    }
+
 }
