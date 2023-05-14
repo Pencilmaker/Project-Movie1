@@ -23,7 +23,11 @@
 	</insert>
 
 	<select id="findReply" resultType="reply">
-		select * from reply where movie_id = #{movie_id}
+		select * from reply where reply_id = #{reply_id}
+	</select>
+	
+	<select id="findMyReplies" resultType="reply">
+		select * from reply where member_id = #{member_id}
 	</select>
 
 	<select id="findReplies" resultType="reply">
@@ -38,7 +42,7 @@
 		where reply_id = #{reply_id}
 	</update>
 
-	<delete id="replyReply">
+	<delete id="removeReply">
 		delete from reply where reply_id = #{reply_id}
 	</delete>
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.movie.model.member.Member;
@@ -44,32 +45,25 @@ public class ReplyController {
 		
 	}
 	
-//	@GetMapping("{movie_id}/{reply_id}")
-//	public ResponseEntity<Reply> findReply(
-//			@PathVariable Long movie_id,
-//			@PathVariable Long Reply_id) {
-//		Reply reply = null;
-//		return ResponseEntity.ok(reply);
-//	}
-//	
-//	@GetMapping("{movie_id}")
-//	public ResponseEntity<List<ReplyDTO>> findReplies(
-//			@SessionAttribute("loginMember") Member loginMember,
-//			@PathVariable Long movie_id) {
-//		List<Reply> replies = replyMapper.findRepiles(movie_id);
-//		List<ReplyDTO> replyDTOs = new ArrayList<>();
-//		if (replies != null && replies.size() > 0) {
-//			for (Reply reply : replies) {
-//				ReplyDTO replyDTO = Reply.toDTO(reply);
-//				if (reply.getMember_id().equals(loginMember.getMember_id())) {
-//					replyDTO.setWriter(true);
-//				}
-//				replyDTOs.add(replyDTO);
-//			}
-//		}
-//		
-//		return ResponseEntity.ok(replyDTOs);
-//		
-//	}
+	// 리플 삭제
+	@PostMapping("remove/{reply_id}")
+	public String removeReply(
+	        @SessionAttribute("loginMember") Member loginMember,
+	        @PathVariable Long reply_id) {
+	    log.info("reply_id: {}", reply_id);
+	    
+	    Reply findreply = replyMapper.findReply(reply_id);
+	    log.info("findreply: {}", findreply);
+	    Long movie_id = findreply.getMovie_id();
+	    if (findreply != null && findreply.getMember_id().equals(loginMember.getMember_id())) {
+	        replyMapper.removeReply(reply_id);
+	    } else {
+	        // 리플이 존재하지 않는 경우 처리
+	        // 예: 예외 던지기, 오류 메시지 표시 등
+	    }
+	    
+	    return "redirect:/movie/movie?movie_id=" + movie_id;
+	}
+
 	
 }

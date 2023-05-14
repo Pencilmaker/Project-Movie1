@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.movie.model.Favorite;
 import com.movie.model.JoinMovie;
 import com.movie.model.member.Member;
+import com.movie.model.reply.Reply;
+import com.movie.model.reply.ReplyDTO;
 import com.movie.repository.FavoriteMapper;
+import com.movie.repository.ReplyMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FavoriteController {
 	
 	private final FavoriteMapper favoriteMapper;
+	private final ReplyMapper replyMapper;
 	
 	@PostMapping("{movie_id}")
 	public String addFavorite(
@@ -58,9 +62,17 @@ public class FavoriteController {
 	
     @GetMapping("")
     public String myFavorite(@SessionAttribute("loginMember") Member loginMember, HttpSession session, Model model) {
+    	// 나의 즐겨찾기
         List<JoinMovie> joinMovies = favoriteMapper.findFavorites(loginMember.getMember_id());
         log.info("joinMovies: {}", joinMovies);
         model.addAttribute("joinMovies", joinMovies);
+        
+        // 나의 리뷰 목록
+        List<Reply> myReplies = replyMapper.findMyReplies(loginMember.getMember_id());
+        log.info("myReplies: {}", myReplies);
+                
+        model.addAttribute("myReplies", myReplies);
+        
         return "member/myPage";
     }
 

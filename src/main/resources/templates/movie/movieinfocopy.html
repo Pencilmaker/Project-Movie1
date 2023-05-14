@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -77,7 +77,7 @@ function showTrailer() {
 <link rel="stylesheet" type="text/css" href="/css/movie/scroll.css" />
 </head>
 <body>
-	<nav>
+		<nav>
 		<a href="/">Home<a>
 				<ul th:if="${session.loginMember}">
 					<li>
@@ -90,7 +90,7 @@ function showTrailer() {
 						</div>
 					</li>
 					<li><a href="http://localhost:9000/movie_web">영화</a></li>
-					<li><a href="http://localhost:9000/member/myPage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/myPage">[[${session.loginMember.member_name}]]님</a></li>
 					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
 				</ul>
 				<ul th:unless="${session.loginMember}">
@@ -152,32 +152,37 @@ function showTrailer() {
 				</section>
 
 				<section id="allreply" class="hidden">
-					<h2>reply</h2>
-					<form th:action="@{/reply/{movie_id}(movie_id=*{movie_id})}" method="post" th:object="${reply}">
-					<input type="hidden" th:field="*{movie_id}">
-					<input type="hidden" th:field="*{member_id}">
-						<div>
-							<input type="text" th:field="*{content}" placeholder="댓글 내용을 입력하세요.">
-							<input type="submit" value="등록">
-						</div>
-					</form>
-					<table>
-						<tr>
-							<th>No</th>
-							<th>작성자</th>
-							<th>내용</th>
-							<th>작성일</th>
-						</tr>
-						<tr th:each="reply, replyStat: ${replies}">
-							<td th:text="${replyStat.count}"></td>
-							<td th:text="${reply.member_id}"></td>
-							<td th:text="${reply.content}"></td>
-							<td th:text="${#temporals.format(reply.created_time, 'yyyy-MM-dd HH:mm')}"></td>
-						</tr>
-					</table>
-					<div>
-
-					</div>
+				    <h2>reply</h2>
+				    <form th:action="@{/reply/{movie_id}(movie_id=*{movie_id})}" method="post" th:object="${reply}">
+				        <input type="hidden" th:field="*{movie_id}">
+				        <input type="hidden" th:field="*{member_id}">
+				        <div>
+				            <input type="text" th:field="*{content}" placeholder="댓글 내용을 입력하세요.">
+				            <input type="submit" value="등록">
+				        </div>
+				    </form>
+				    <table>
+				        <tr>
+				            <th>No</th>
+				            <th>작성자</th>
+				            <th>내용</th>
+				            <th>작성일</th>
+				            <th></th>
+				        </tr>
+				        <tr th:each="reply, replyStat: ${replies}">
+				            <td th:text="${replyStat.count}"></td>
+				            <td th:text="${reply.member_id}"></td>
+				            <td th:text="${reply.content}"></td>
+				            <td th:text="${#temporals.format(reply.created_time, 'yyyy-MM-dd HH:mm')}"></td>
+				            <td>
+				                <form th:if="${reply.member_id == session.loginMember.member_id}" th:action="@{/reply/remove/{reply_id}(reply_id=${reply.reply_id})}" method="post">
+				                    <input type="hidden" th:field="${reply.reply_id}">
+				                    <input type="submit" value="삭제" onclick="return confirm('정말로 삭제하시겠습니까?')">
+				                </form>
+				            </td>
+				        </tr>
+				    </table>
+				    <div></div>
 				</section>
 
 				<section id="stillcut" class="hidden">

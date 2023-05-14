@@ -12,5 +12,4 @@ public class ReplyDTO {
 	private String content;
 	private String member_id;
 	private LocalDateTime created_time;
-	private boolean isWriter;
 }

@@ -15,6 +15,8 @@ public interface ReplyMapper {
 	
 	List<Reply> findReplies(Long movie_id);
 	
+	List<Reply> findMyReplies(String member_id);
+	
 	void updateReply(Reply reply);
 	
 	void removeReply(Long reply_id);

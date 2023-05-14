@@ -7,7 +7,7 @@
 <title>영화 검색 결과</title>
 </head>
 <body>
-	<nav>
+		<nav>
 		<a href="/">Home<a>
 				<ul th:if="${session.loginMember}">
 					<li>
@@ -20,7 +20,7 @@
 						</div>
 					</li>
 					<li><a href="http://localhost:9000/movie_web">영화</a></li>
-					<li><a href="http://localhost:9000/member/myPage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/myPage">[[${session.loginMember.member_name}]]님</a></li>
 					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
 				</ul>
 				<ul th:unless="${session.loginMember}">

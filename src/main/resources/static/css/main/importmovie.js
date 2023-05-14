@@ -52,8 +52,6 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
 			songElement.setAttribute('id', `song-${index + 1}`);
 
 			const imgLinkElement = document.createElement('a');
-			imgLinkElement.href = `http://localhost:9000/movie/movie?movie_id=${movie.id}`;
-			imgLinkElement.target = '_blank';
 
 			const imgElement = document.createElement('img');
 			imgElement.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -75,6 +73,11 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
 							.then(response => response.json())
 							.then(creditsData => {
 								const castLimited = creditsData.cast.slice(0, 10); // 배우 정보 개수를 10개로 제한
+								xhr.onreadystatechange = function () {
+									if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+										window.location.href = `http://localhost:9000/movie/movie?movie_id=${movie.id}`;
+									}
+								};
 								xhr.send(
 									JSON.stringify({
 										movie: {
@@ -125,8 +128,6 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
 			movieElement.classList.add('movie');
 
 			const imgLinkElement = document.createElement('a');
-			imgLinkElement.href = `http://localhost:9000/movie/movie?movie_id=${movie.id}`;
-			imgLinkElement.target = '_blank';
 
 			const imgElement = document.createElement('img');
 			imgElement.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -150,6 +151,11 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
 							.then(response => response.json())
 							.then(creditsData => {
 								const castLimited = creditsData.cast.slice(0, 10); // 배우 정보 개수를 10개로 제한
+								xhr.onreadystatechange = function () {
+									if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+										window.location.href = `http://localhost:9000/movie/movie?movie_id=${movie.id}`;
+									}
+								};
 								xhr.send(
 									JSON.stringify({
 										movie: {
@@ -191,6 +197,7 @@ fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-
 		console.error('Error:', error);
 	});
 
+
 /* section2 영화 */
 fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=ko-KR&page=1&region=KR`)
 	.then(response => response.json())
@@ -204,8 +211,6 @@ fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=k
 			movieElement.classList.add('movie');
 
 			const imgLinkElement = document.createElement('a');
-			imgLinkElement.href = `http://localhost:9000/movie/movie?movie_id=${movie.id}`;
-			imgLinkElement.target = '_blank';
 
 			const imgElement = document.createElement('img');
 			imgElement.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -229,6 +234,11 @@ fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=k
 							.then(response => response.json())
 							.then(creditsData => {
 								const castLimited = creditsData.cast.slice(0, 10); // 배우 정보 개수를 10개로 제한
+								xhr.onreadystatechange = function () {
+									if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+										window.location.href = `http://localhost:9000/movie/movie?movie_id=${movie.id}`;
+									}
+								};
 								xhr.send(
 									JSON.stringify({
 										movie: {

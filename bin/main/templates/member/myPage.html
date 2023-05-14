@@ -21,7 +21,7 @@
 						</div>
 					</li>
 					<li><a href="http://localhost:9000/movie_web">영화</a></li>
-					<li><a href="http://localhost:9000/member/myPage">[[${session.loginMember.member_name}]]님</a></li>
+					<li><a href="http://localhost:9000/myPage">[[${session.loginMember.member_name}]]님</a></li>
 					<li><a href="http://localhost:9000/member/logout">로그아웃</a></li>
 				</ul>
 				<ul th:unless="${session.loginMember}">
@@ -40,7 +40,7 @@
 	</nav>
 
 	<div class="main">
-		<h1>여기에 개인정보 표시</h1>
+		<h1>마이페이지</h1>
 		<div>아이디 : [[${session.loginMember.member_name}]]님</div>
 	</div>
 
@@ -60,13 +60,19 @@
 			<table>
 				<tr>
 					<th>No</th>
-					<th>제목</th>
-					<th>조회수</th>
+					<th>영화ID</th>
+					<th>내용</th>
+					<th>작성일</th>
+					<th></th>
 				</tr>
-				<tr id="tableList">
-					<td>(ex)1</td>
-					<td>(ex)테스트</td>
-					<td>(ex)100</td>
+				<tr th:each="reply, replyStat: ${myReplies}">
+					<td th:text="${replyStat.count}"></td>
+					<td><a th:href="@{/movie/movie?movie_id={movie_id}(movie_id=${reply.movie_id})}" th:text="${reply.movie_id}"></a></td>
+					<td th:text="${reply.content}"></td>
+					<td	th:text="${#temporals.format(reply.created_time, 'yyyy-MM-dd HH:mm')}"></td>
+					<td>
+						
+					</td>
 				</tr>
 			</table>
 		</section>
@@ -83,14 +89,15 @@
 		<section id="favoriteMovies" class="hidden">
 			<h2>My Favorite Movies</h2>
 			<ul th:each="joinMovie, joinMovieStat: ${joinMovies}">
-			    <li>
-			      <a th:href="@{/movie/movie?movie_id={movie_id}(movie_id=${joinMovie.movie_id})}">
-			        <div class="movie-info">
-			          <img style="width: 50px; height: 100px;"class="movie-poster" th:src="@{https://image.tmdb.org/t/p/w500/__${joinMovie.poster_path}__}" alt="" />
-			          <span class="movie-title" th:text="${joinMovie.title}"></span>
-			        </div>
-			      </a>
-			    </li>
+				<li><a
+					th:href="@{/movie/movie?movie_id={movie_id}(movie_id=${joinMovie.movie_id})}">
+						<div class="movie-info">
+							<img style="width: 50px; height: 100px;" class="movie-poster"
+								th:src="@{https://image.tmdb.org/t/p/w500/__${joinMovie.poster_path}__}"
+								alt="" /> <span class="movie-title"
+								th:text="${joinMovie.title}"></span>
+						</div>
+				</a></li>
 			</ul>
 		</section>
 
